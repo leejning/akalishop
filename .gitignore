@@ -1,0 +1,8 @@
+# Project exclude paths
+/business/business-admin-goods-manage/target/
+/cloud/cloud-image-service/target/
+/common/common-base/target/
+/configuration/config-swagger2/target/
+/configuration/config-web-exception-handle/target/
+/provider/provider-goods/target/
+/provider/provider-goods-interface/target/

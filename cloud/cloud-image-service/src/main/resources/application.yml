@@ -1,0 +1,32 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: ${random.int[8100,9999]}
+  servlet:
+    multipart:
+      max-file-size: 5MB # 限制文件上传的大小
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 182.92.219.19:8848
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+fdfs:
+  so-timeout: 2501
+  connect-timeout: 2000
+  thumb-image: # 缩略图
+    width: 60
+    height: 60
+  tracker-list: # tracker地址
+    - 47.107.167.243:22122
+icourse:
+  upload:
+    hostDomain: ""
+    image:
+  doc:
+    title: 图片上传服务文档
+    desc: 图片上传Api

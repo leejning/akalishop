@@ -1,0 +1,5 @@
+swagger2:
+  doc:
+    title: 商品管理业务文档
+    desc: 商品管理业务Api
+    basePackage: com.akali.business.goods
