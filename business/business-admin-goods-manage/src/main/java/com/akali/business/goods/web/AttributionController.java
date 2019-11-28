@@ -1,14 +1,14 @@
 package com.akali.business.goods.web;
 
 import com.akali.business.goods.api.AttributionControllerApi;
+import com.akali.common.dto.goods.AttrGroupDTO;
+import com.akali.common.dto.goods.AttrOptionDTO;
+import com.akali.common.dto.goods.AttributionDTO;
+import com.akali.common.dto.goods.CategoryAttrInfoDTO;
 import com.akali.common.model.response.DubboResponse;
 import com.akali.common.model.response.ResponseResult;
-import com.akali.config.exception.util.ExceptionCast;
+import com.akali.common.utils.ExceptionCast;
 import com.akali.provider.goods.api.AttributionService;
-import com.akali.provider.goods.dto.AttrGroupDTO;
-import com.akali.provider.goods.dto.AttrOptionDTO;
-import com.akali.provider.goods.dto.AttributionDTO;
-import com.akali.provider.goods.dto.CategoryAttrInfoDTO;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.*;
 
@@ -71,14 +71,14 @@ public class AttributionController implements AttributionControllerApi {
     }
 
     /**
-     * 根据三级分类id查找全部商品属性信息
+     * 根据三级分类id查找全部商品属性信息，按分组存放
      * @param cateId
      * @return
      */
     @GetMapping("/allinfo/{cateId}")
     @Override
     public ResponseResult<CategoryAttrInfoDTO> queryAllAttributeInfoByCid(@PathVariable Long cateId) {
-        DubboResponse<CategoryAttrInfoDTO> response = attributionService.queryAllAttributeInfoByCid(cateId);
+        DubboResponse<CategoryAttrInfoDTO> response = attributionService.queryAllAttributeByCidWithGroup(cateId);
         if(!response.isSuccess()){
             ExceptionCast.cast(response.getResultCode());
         }

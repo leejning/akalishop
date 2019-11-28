@@ -52,12 +52,12 @@ public class PmsBaseAttribution {
     @Column(columnDefinition="tinyint",length=2)
     private Boolean saleAttr;
     /**
-     * 是否是通用属性，true是，false不是
+     * 是否是通用属性，true是 则属于spu，false不是 则属于sku
      */
     @Column(columnDefinition="tinyint",length=2)
     private Boolean generic;
     /**
-     * 是否参与搜索
+     * 是否可用户可选的搜索属性(elasticsearch聚合)
      */
     @Column(columnDefinition="tinyint",length=2)
     private Boolean searching;

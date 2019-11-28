@@ -22,6 +22,8 @@
         <module>business</module>
         <module>provider</module>
         <module>configuration</module>
+        <module>message</module>
+        <module>dependencies</module>
     </modules>
     <properties>
         <!-- Native Cloud -->
@@ -37,6 +39,7 @@
         <hibernate.validator.version>6.0.17.Final</hibernate.validator.version>
         <springfox-swagger.version>2.7.0</springfox-swagger.version>
         <google.guava>18.0</google.guava>
+        <google.kaptcha>2.3.2</google.kaptcha>
     </properties>
 
     <dependencyManagement>
@@ -167,6 +170,12 @@
                 <version>${google.guava}</version>
             </dependency>
             <!--            common end-->
+            <!--生成图片验证码-->
+            <dependency>
+                <groupId>com.github.penggle</groupId>
+                <artifactId>kaptcha</artifactId>
+                <version>${google.kaptcha}</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
 

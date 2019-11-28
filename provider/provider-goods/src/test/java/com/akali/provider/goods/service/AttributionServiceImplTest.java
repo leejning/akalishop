@@ -1,11 +1,11 @@
 package com.akali.provider.goods.service;
 
+import com.akali.common.dto.goods.CategoryAttrInfoDTO;
 import com.akali.common.model.response.DubboResponse;
 import com.akali.provider.goods.api.AttributionService;
 import com.akali.provider.goods.bean.PmsBaseAttrOption;
 import com.akali.provider.goods.dao.BaseAttrOptionDao;
-import com.akali.provider.goods.dto.CategoryAttrInfoDTO;
-import com.akali.provider.goods.querydto.AttrOptionQueryDTO;
+import com.akali.provider.goods.queryhelper.AttrOptionEntityQueryHelper;
 import org.apache.dubbo.config.annotation.Reference;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -31,15 +31,18 @@ public class AttributionServiceImplTest {
 //        System.out.println(byAttrIds.toString());
         Long[] ids = new Long[]{1l,2l};
         List<Long> longs = Arrays.asList(ids);
+        AttrOptionEntityQueryHelper queryDTO = new AttrOptionEntityQueryHelper();
+        queryDTO.setInValues(longs);
+        queryDTO.setInField("attrId");
         List<PmsBaseAttrOption> optionsByAttrIds =
-                baseAttrOptionDao.findAllHasInCondition(longs, AttrOptionQueryDTO.getWhere());
+                baseAttrOptionDao.findAll(AttrOptionEntityQueryHelper.getWhere(queryDTO));
         System.out.println(optionsByAttrIds.toString());
 
     }
 
     @Test
     public void queryAllAttributeInfoByCid(){
-        DubboResponse<CategoryAttrInfoDTO> res = attributionService.queryAllAttributeInfoByCid(1l);
+        DubboResponse<CategoryAttrInfoDTO> res = attributionService.queryAllAttributeByCidWithGroup(1l);
         System.out.println(res);
     }
 

@@ -1,0 +1,5 @@
+swagger2:
+  doc:
+    title: 会员注册业务文档
+    desc: 会员注册业务Api
+    basePackage: com.akali.business.user

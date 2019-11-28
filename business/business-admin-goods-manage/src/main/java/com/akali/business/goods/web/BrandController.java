@@ -1,14 +1,18 @@
 package com.akali.business.goods.web;
 
 import com.akali.business.goods.api.BrandControllerApi;
+import com.akali.common.dto.goods.BrandCreateDTO;
 import com.akali.common.model.response.DubboResponse;
 import com.akali.common.model.response.ResponseResult;
-import com.akali.config.exception.util.ExceptionCast;
+import com.akali.common.utils.ExceptionCast;
 import com.akali.provider.goods.api.BrandService;
-import com.akali.provider.goods.dto.BrandCreateDTO;
 import org.apache.dubbo.config.annotation.Reference;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 
 /**
  * @ClassName BrandController
@@ -37,4 +41,10 @@ public class BrandController implements BrandControllerApi {
         }
         return ResponseResult.SUCCESS();
     }
+
+    @GetMapping("/echo")
+    public void echo(HttpServletResponse response) throws IOException {
+        response.getWriter().write("我是中文呀");
+    }
+
 }

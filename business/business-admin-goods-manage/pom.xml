@@ -35,10 +35,10 @@
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
         <!--oauth2-->
-        <!--<dependency>
+        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-oauth2</artifactId>
-        </dependency>-->
+        </dependency>
         <!-- Spring Cloud Alibaba-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
@@ -54,11 +54,15 @@
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.akali.config</groupId>
-            <artifactId>config-web-exception-handle</artifactId>
+            <groupId>com.akali.business</groupId>
+            <artifactId>business-admin-permission-manager-feign</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.akali.config</groupId>
+            <artifactId>config-admin-oauth2</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

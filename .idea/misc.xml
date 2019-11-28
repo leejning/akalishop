@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ExternalStorageConfigurationManager" enabled="true" />
+  <component name="MavenProjectsManager">
+    <option name="originalFiles">
+      <list>
+        <option value="$PROJECT_DIR$/pom.xml" />
+      </list>
+    </option>
+    <option name="ignoredFiles">
+      <set>
+        <option value="$PROJECT_DIR$/api/pom.xml" />
+        <option value="$PROJECT_DIR$/api/provider-item-api/pom.xml" />
+        <option value="$PROJECT_DIR$/api/provider-user-api/pom.xml" />
+        <option value="$PROJECT_DIR$/business-admin-permission-manager-feign/pom.xml" />
+        <option value="$PROJECT_DIR$/common/common-dto/pom.xml" />
+        <option value="$PROJECT_DIR$/common/common-member-oauth2-utils/pom.xml" />
+        <option value="$PROJECT_DIR$/common/common-utils/pom.xml" />
+        <option value="$PROJECT_DIR$/dependency/pom.xml" />
+        <option value="$PROJECT_DIR$/message/message-consumer-interface/pom.xml" />
+        <option value="$PROJECT_DIR$/provider/pms-good-provider/pom.xml" />
+        <option value="$PROJECT_DIR$/provider/provider-goods-es/pom.xml" />
+        <option value="$PROJECT_DIR$/provider/provider-item-es/pom.xml" />
+        <option value="$PROJECT_DIR$/provider/provider-item-interface/pom.xml" />
+        <option value="$PROJECT_DIR$/provider/provider-item/pom.xml" />
+        <option value="$PROJECT_DIR$/provider/provider-user-interface/pom.xml" />
+        <option value="$PROJECT_DIR$/provider/provider-user/pom.xml" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectRootManager" version="2" languageLevel="JDK_1_8" project-jdk-name="1.8" project-jdk-type="JavaSDK">
+    <output url="file://$PROJECT_DIR$/out" />
+  </component>
+</project>

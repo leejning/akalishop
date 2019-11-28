@@ -32,10 +32,10 @@
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>com.alibaba.cloud</groupId>
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
-        </dependency>
+        </dependency>-->
 
         <!--oauth2-->
         <!--<dependency>
@@ -46,6 +46,16 @@
         <dependency>
             <groupId>com.github.tobato</groupId>
             <artifactId>fastdfs-client</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.akali.config</groupId>
+            <artifactId>config-web-swagger2</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.akali.config</groupId>
+            <artifactId>config-web-exception-handle</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
     <build>

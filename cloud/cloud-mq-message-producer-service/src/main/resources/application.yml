@@ -1,0 +1,25 @@
+server:
+  port: ${random.int[8100,9999]}
+spring:
+  application:
+    name: cloud-send-mq-message-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 182.92.219.19:8848
+  rabbitmq:
+    host: 182.92.219.19
+    username: guest
+    password: guest
+    virtual-host: /
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+swagger2:
+  doc:
+    title: MQ消息发送服务文档
+    desc: MQ消息发送服务Api
+    basePackage: com.akali.message.send
+

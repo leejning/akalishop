@@ -13,6 +13,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>common-base</module>
+        <module>common-apps</module>
     </modules>
 
 

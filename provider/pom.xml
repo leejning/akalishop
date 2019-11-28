@@ -12,87 +12,41 @@
     <artifactId>provider</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>provider-user-interface</module>
-        <module>provider-user</module>
         <module>provider-goods-interface</module>
         <module>provider-goods</module>
         <module>provider-cart-interface</module>
         <module>provider-cart</module>
         <module>provider-order-interface</module>
         <module>provider-order</module>
-
+        <module>provider-es-goods-interface</module>
+        <module>provider-es-goods</module>
+        <module>provider-ums-member-interface</module>
+        <module>provider-ums-member</module>
+        <module>provider-ums-admin-interface</module>
+        <module>provider-ums-admin</module>
     </modules>
 
     <dependencies>
-
-        <!-- Apache Dubbo Begin -->
         <dependency>
-            <groupId>com.alibaba.nacos</groupId>
-            <artifactId>nacos-client</artifactId>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <!-- Apache Dubbo dep -->
+        <dependency>
+            <groupId>com.akali.dependency</groupId>
+            <artifactId>dep-rpc-dubbo</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.dubbo</groupId>
-            <artifactId>dubbo-registry-nacos</artifactId>
+            <groupId>com.akali.common</groupId>
+            <artifactId>common-base</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.apache.dubbo</groupId>
-            <artifactId>dubbo-spring-boot-starter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.dubbo</groupId>
-            <artifactId>dubbo-spring-boot-actuator</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.dubbo</groupId>
-            <artifactId>dubbo</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>org.springframework</groupId>
-                    <artifactId>spring</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>javax.servlet</groupId>
-                    <artifactId>servlet-api</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>log4j</groupId>
-                    <artifactId>log4j</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.apache.dubbo</groupId>
-            <artifactId>dubbo-serialization-kryo</artifactId>
-            <exclusions>
-                <exclusion>
-                    <groupId>log4j</groupId>
-                    <artifactId>log4j</artifactId>
-                </exclusion>
-                <exclusion>
-                    <groupId>org.apache.dubbo</groupId>
-                    <artifactId>dubbo-common</artifactId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.spring</groupId>
-            <artifactId>spring-context-support</artifactId>
-        </dependency>
-        <!-- Apache Dubbo End -->
-
-        <!--数据库相关 Begin-->
-        <dependency>
-            <groupId>com.zaxxer</groupId>
-            <artifactId>HikariCP</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>mysql</groupId>
-            <artifactId>mysql-connector-java</artifactId>
-        </dependency>
-        <!--数据库相关 End-->
-        <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
+            <groupId>com.akali.config</groupId>
+            <artifactId>config-sentinel</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
 

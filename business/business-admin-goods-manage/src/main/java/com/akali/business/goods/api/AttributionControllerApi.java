@@ -1,7 +1,10 @@
 package com.akali.business.goods.api;
 
+import com.akali.common.dto.goods.AttrGroupDTO;
+import com.akali.common.dto.goods.AttrOptionDTO;
+import com.akali.common.dto.goods.AttributionDTO;
+import com.akali.common.dto.goods.CategoryAttrInfoDTO;
 import com.akali.common.model.response.ResponseResult;
-import com.akali.provider.goods.dto.*;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 

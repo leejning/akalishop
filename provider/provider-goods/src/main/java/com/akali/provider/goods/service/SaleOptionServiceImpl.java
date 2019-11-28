@@ -1,12 +1,12 @@
 package com.akali.provider.goods.service;
 
 import com.akali.common.code.CommonCode;
+import com.akali.common.dto.goods.SaleOptionDTO;
 import com.akali.common.model.response.DubboResponse;
 import com.akali.common.model.response.QueryResult;
 import com.akali.provider.goods.api.SaleOptionService;
 import com.akali.provider.goods.bean.PmsSaleOption;
 import com.akali.provider.goods.dao.BaseSaleOptionDao;
-import com.akali.provider.goods.dto.SaleOptionDTO;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 

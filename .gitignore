@@ -6,3 +6,5 @@
 /configuration/config-web-exception-handle/target/
 /provider/provider-goods/target/
 /provider/provider-goods-interface/target/
+**/target/
+*.iml

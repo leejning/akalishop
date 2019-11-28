@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="Encoding">
+    <file url="file://$PROJECT_DIR$" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/business" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/business/business-admin-goods-manage" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/business/business-admin-login-oauth2" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/business/business-admin-permission-manager" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/business/business-admin-permission-manager-feign" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/business/business-member-cart" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/business/business-member-login-oauth2" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/business/business-member-profile" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/business/business-member-registry" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/business/business-public-search" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud/cloud-image-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud/cloud-image-verify-code-feign" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud/cloud-image-verify-code-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud/cloud-mq-message-producer-feign" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud/cloud-mq-message-producer-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/cloud/cloud-send-email-service" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/common-apps" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/common-base" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/common-dto" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/common/common-utils" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/configuration" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/configuration/config-admin-oauth2" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/configuration/config-jpa-extends" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/configuration/config-member-oauth2" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/configuration/config-mong-extends" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/configuration/config-sentinel" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/configuration/config-web-exception-handle" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/configuration/config-web-swagger2" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dependencies" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dependencies/dep-db-mysql" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/dependencies/dep-rpc-dubbo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/message" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/message/message-consumer" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/message/message-producer" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/message/message-producer-inteface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/provider" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/provider/provider-cart" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/provider/provider-cart-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/provider/provider-es-goods" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/provider/provider-es-goods-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/provider/provider-goods" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/provider/provider-goods-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/provider/provider-order" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/provider/provider-order-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/provider/provider-ums-admin" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/provider/provider-ums-admin-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/provider/provider-ums-member" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/provider/provider-ums-member-interface" charset="UTF-8" />
+  </component>
+</project>

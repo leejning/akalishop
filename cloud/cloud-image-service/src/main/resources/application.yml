@@ -1,8 +1,8 @@
 server:
-  port: 8081
+  port: ${random.int[8100,9999]}
 spring:
   application:
-    name: ${random.int[8100,9999]}
+    name: cloud-image-service
   servlet:
     multipart:
       max-file-size: 5MB # 限制文件上传的大小
@@ -23,10 +23,8 @@ fdfs:
     height: 60
   tracker-list: # tracker地址
     - 47.107.167.243:22122
-icourse:
-  upload:
-    hostDomain: ""
-    image:
+swagger2:
   doc:
     title: 图片上传服务文档
     desc: 图片上传Api
+    basePackage: com.akali.cloud

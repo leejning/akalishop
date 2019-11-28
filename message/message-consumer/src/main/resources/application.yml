@@ -1,0 +1,22 @@
+spring:
+  application:
+    name: message-consumer
+  rabbitmq:
+    host: 182.92.219.19
+    username: guest
+    password: guest
+    virtual-host: /
+dubbo:
+  scan:
+    base-packages: com.akali.message.consumer.listener
+  protocol:
+    name: dubbo
+    port: ${random.int[20000,23000]}
+    serialization: kryo
+  registry:
+    address: nacos://182.92.219.19:8848
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"

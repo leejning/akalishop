@@ -2,15 +2,15 @@ package com.akali.provider.goods.service;
 
 import com.akali.common.code.CommonCode;
 import com.akali.common.code.ProductCode;
+import com.akali.common.dto.goods.*;
 import com.akali.common.model.response.DubboResponse;
 import com.akali.common.model.response.QueryResult;
 import com.akali.common.utils.MapperUtils;
 import com.akali.provider.goods.api.ProductService;
 import com.akali.provider.goods.bean.*;
 import com.akali.provider.goods.dao.*;
-import com.akali.provider.goods.dto.*;
-import com.akali.provider.goods.querydto.AttrOptionQueryDTO;
-import com.akali.provider.goods.querydto.AttributionQueryDTO;
+import com.akali.provider.goods.queryhelper.AttrOptionEntityQueryHelper;
+import com.akali.provider.goods.queryhelper.AttributionEntityQueryHelper;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -48,6 +48,9 @@ public class ProductServiceImpl implements ProductService {
     private SpuSaleOptionValueDao spuSaleOptionValueDao;
     @Autowired
     private SkuDao skuDao;
+    @Autowired
+    private SkuStockDao skuStockDao;
+
 
     /**
      * 创建spu基本信息
@@ -82,12 +85,12 @@ public class ProductServiceImpl implements ProductService {
      * @return
      */
     @Override
-    public DubboResponse<SpuDetaiDTO> querySpuDetail(Long spuId) {
+    public DubboResponse<SpuDetailDTO> querySpuDetail(Long spuId) {
         Optional<PmsSpuDetail> opt = spuDetailDao.findById(spuId);
         if (!opt.isPresent()) {
             DubboResponse.FAIL(ProductCode.SPU_DETAIL_NOT_EXSIST);
         }
-        return DubboResponse.SUCCESS(new SpuDetaiDTO(opt.get()));
+        return DubboResponse.SUCCESS(new SpuDetailDTO(opt.get()));
     }
 
     /**
@@ -115,35 +118,50 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     @Override
     public DubboResponse<Void> createProductSku(SkuCreateDTO skuCreateDTO) throws Exception {
-        if (checkExistsSku(skuCreateDTO)) {
-            return DubboResponse.FAIL(ProductCode.THE_SKU_IS_EXSIST);
-        }
+//        if (checkExistsSku(skuCreateDTO)) {
+//            return DubboResponse.FAIL(ProductCode.THE_SKU_IS_EXSIST);
+//        }
 
         //1、获取该sku对应的的PmsBaseAttrValue的信息
         Map<Long, Long> ownSpec = skuCreateDTO.getOwnSpec();
         List<PmsBaseAttrValue> attrValues = baseAttrValueDao.findAllById(ownSpec.values());
-        Map<Long, PmsBaseAttrValue> attrValueMap = attrValues.stream().collect(Collectors.toMap(av -> av.getAttrId(), av -> av));
+        //使用map存放，方便获取
+        Map<Long, PmsBaseAttrValue> attrValueMap =
+                attrValues.stream().collect(Collectors.toMap(av -> av.getAttrId(), av -> av));
 
-        //2、获取sku的PmsBaseAttrValue的对应的PmsBaseAttribution
-        AttributionQueryDTO attributionQueryDTO = new AttributionQueryDTO();
-        attributionQueryDTO.setHasOption(true);
-        List<PmsBaseAttribution> hasOptionAttributes = baseAttributionDao.findAllHasInCondition(attrValueMap.keySet(), AttributionQueryDTO.getWhere(attributionQueryDTO));
+        //2、获取有固定选项的PmsBaseAttribution
+        //与sku有关的所有PmsBaseAttribution的id集合
+        Set<Long> attrIds = attrValueMap.keySet();
+        //构造查询条件
+        AttributionEntityQueryHelper attributionQueryHelper = new AttributionEntityQueryHelper();
+        attributionQueryHelper.setHasOption(true);
+        attributionQueryHelper.setInField("attrId");
+        attributionQueryHelper.setInValues(attrIds);
+        //查询获取结果
+        List<PmsBaseAttribution> hasOptionAttributes =
+                baseAttributionDao.findAll(AttributionEntityQueryHelper.getWhere(attributionQueryHelper));
 
-        //2.1 处理固定选项的属性，如手机的内存大小，cpu核心数
+
+        //3.获取有固定选项的PmsBaseAttribution集合对应所有PmsBaseAttrOption的集合
         List<Long> hasOptionAttrIds = hasOptionAttributes.stream().map(a -> a.getId()).collect(Collectors.toList());
         boolean hasOptionAttr = !hasOptionAttrIds.isEmpty();
+        //使用map存放，方便获取
         Map<Long, PmsBaseAttrOption> attrOptMap = Collections.emptyMap();
         if (hasOptionAttr) {
-            List<PmsBaseAttrOption> attrOpts = baseAttrOptionDao.findAllHasInCondition(hasOptionAttrIds, AttrOptionQueryDTO.getWhere());
+            AttrOptionEntityQueryHelper queryDTO = new AttrOptionEntityQueryHelper();
+            queryDTO.setInField("attrId");
+            queryDTO.setInValues(hasOptionAttrIds);
+            List<PmsBaseAttrOption> attrOpts =
+                    baseAttrOptionDao.findAll(AttrOptionEntityQueryHelper.getWhere(queryDTO));
             attrOptMap = attrOpts.stream().collect(Collectors.toMap(a -> a.getId(), a -> a));
         }
 
-        //3、获取SpuSaleOption
+        //4、获取spu销售选项SpuSaleOption
         List<SpuSaleOptionDTO> spuSaleOpts = spuSaleOptionDao.findBySpuId(skuCreateDTO.getSpuId());
 
 
-        //4、构造和保存销售选项的值对象PmsSpuSaleOptionValue
-        List<PmsSpuSaleOptionValue> spuSaleOptionValues = new ArrayList<>();
+        //5、构造和保存销售选项的值对象PmsSpuSaleOptionValue
+        List<PmsSpuSaleOptionValue> spuSaleOptionValues = Lists.newArrayList();
         for (SpuSaleOptionDTO spuSaleOpt : spuSaleOpts) {
             PmsSpuSaleOptionValue optionValue = new PmsSpuSaleOptionValue();
             optionValue.setSpuSaleOptionId(spuSaleOpt.getSaleOptionId());
@@ -163,10 +181,10 @@ public class ProductServiceImpl implements ProductService {
             optionValue.setSpuId(skuCreateDTO.getSpuId());
             spuSaleOptionValues.add(optionValue);
         }
-
+        //保存
         spuSaleOptionValueDao.saveAll(spuSaleOptionValues);
 
-        //5、更新对应spuDetail 的 saleOptionAttr字段
+        //6、更新对应spuDetail 的 saleOptionAttr字段
         PmsSpuDetail spuDetail = spuDetailDao.findSaleOptionAttrBySpuId(skuCreateDTO.getSpuId());
         String saleOptionAttr = spuDetail.getSaleOptionAttr();
         Map<String, List<Long>> saleOptionAttrMap;
@@ -194,6 +212,8 @@ public class ProductServiceImpl implements ProductService {
         PmsSku pmsSku = new PmsSku(skuCreateDTO);
         pmsSku.setIndexes(indexes.toString());
         skuDao.save(pmsSku);
+        //创建库存
+        skuStockDao.save(PmsSkuStock.initStock(pmsSku.getId()));
 
         return DubboResponse.SUCCESS(CommonCode.SUCCESS);
     }
@@ -219,6 +239,20 @@ public class ProductServiceImpl implements ProductService {
     public DubboResponse<Void> updateSpuDetail(SpuDetaiModifyDTO spuDetaiModifyDTO) {
         spuDetailDao.modifyBySpuId(spuDetaiModifyDTO);
         return DubboResponse.SUCCESS(CommonCode.SUCCESS);
+    }
+
+    /**
+     * 根据spuId 获取所有的sku
+     * @param spuId
+     * @return
+     */
+    @Override
+    public DubboResponse<QueryResult<SkuDTO>> queryProductSkus(Long spuId) {
+        List<SkuDTO> queryData = skuDao.findBySpuId(spuId);
+        if(queryData.isEmpty()){
+            //
+        }
+        return DubboResponse.SUCCESS(QueryResult.create(queryData, (long) queryData.size()));
     }
 
     /**

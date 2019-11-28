@@ -16,8 +16,8 @@ public enum CommonCode implements ResultCode{
     UNAUTHORISE(false,403,"权限不足，无权操作！"),
     SERVER_ERROR(false,500,"抱歉，系统繁忙，请稍后重试！"),
     SERVICE_DOWN_LEVEL(false,30020,"服务限流控制！"),
-    TO_BE_CONTINUE(false,20012,"敬请期待")
-
+    TO_BE_CONTINUE(false,20012,"敬请期待"),
+    APP_UP_FAIL(false,10001,"应用启动失败"),
     ;
 //    private static ImmutableMap<Integer, CommonCode> codes ;
     //操作是否成功

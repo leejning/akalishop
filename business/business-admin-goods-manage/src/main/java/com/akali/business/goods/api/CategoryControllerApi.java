@@ -1,8 +1,8 @@
 package com.akali.business.goods.api;
 
+import com.akali.common.dto.goods.CategoryDTO;
 import com.akali.common.model.response.QueryResponseResult;
 import com.akali.common.model.response.ResponseResult;
-import com.akali.provider.goods.dto.CategoryDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -20,7 +20,7 @@ public interface CategoryControllerApi {
     public ResponseResult<Void> createCategory(Integer level, CategoryDTO categoryDTO);
 
     @ApiOperation("获取各级分类")
-    public QueryResponseResult<CategoryDTO> getCategoryByPid(Integer level,Long pid);
+    public QueryResponseResult<CategoryDTO> getCategoryByPid(Integer level, Long pid);
 
 
 

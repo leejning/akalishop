@@ -13,8 +13,13 @@
     <artifactId>configuration</artifactId>
     <packaging>pom</packaging>
     <modules>
-        <module>config-swagger2</module>
+        <module>config-web-swagger2</module>
         <module>config-web-exception-handle</module>
+        <module>config-jpa-extends</module>
+        <module>config-sentinel</module>
+        <module>config-admin-oauth2</module>
+        <module>config-member-oauth2</module>
+        <module>config-mong-extends</module>
     </modules>
 
 

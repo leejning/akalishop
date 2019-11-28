@@ -1,10 +1,9 @@
 package com.akali.provider.goods.api;
 
+import com.akali.common.dto.goods.*;
 import com.akali.common.model.response.DubboResponse;
-import com.akali.provider.goods.dto.AttrGroupDTO;
-import com.akali.provider.goods.dto.AttrOptionDTO;
-import com.akali.provider.goods.dto.AttributionDTO;
-import com.akali.provider.goods.dto.CategoryAttrInfoDTO;
+
+import java.util.List;
 
 /**
  * @ClassName AttributionService
@@ -36,9 +35,23 @@ public interface AttributionService {
     DubboResponse<Void> createAttributeGroup(AttrGroupDTO attrGroupDTO);
 
     /**
-     * 根据三级分类id查找全部商品属性信息
+     * 根据三级分类id,查找全部商品属性信息，按分组存放
      * @param cateId
      * @return
      */
-    DubboResponse<CategoryAttrInfoDTO> queryAllAttributeInfoByCid(Long cateId);
+    DubboResponse<CategoryAttrInfoDTO> queryAllAttributeByCidWithGroup(Long cateId);
+
+    /**
+     * 根据三级分类id，查询该分类的全部商品属性
+     * @param cid3
+     * @return
+     */
+    DubboResponse<List<CateAttributeDTO>> queryAttributesByCid(Long cid3);
+
+    /**
+     * 根据spuId获取 商品所有属性值
+     * @param spuId
+     * @return
+     */
+    DubboResponse<List<AttrValueDTO>> queryProductAttrValueBySpuId(Long spuId);
 }

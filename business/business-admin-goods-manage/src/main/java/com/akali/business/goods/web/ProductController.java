@@ -1,13 +1,13 @@
 package com.akali.business.goods.web;
 
 import com.akali.business.goods.api.ProductControllerApi;
+import com.akali.common.dto.goods.*;
 import com.akali.common.model.response.DubboResponse;
 import com.akali.common.model.response.QueryResponseResult;
 import com.akali.common.model.response.QueryResult;
 import com.akali.common.model.response.ResponseResult;
-import com.akali.config.exception.util.ExceptionCast;
+import com.akali.common.utils.ExceptionCast;
 import com.akali.provider.goods.api.ProductService;
-import com.akali.provider.goods.dto.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.*;
@@ -81,8 +81,8 @@ public class ProductController implements ProductControllerApi {
      */
     @GetMapping("/spu/detail/{spuId}")
     @Override
-    public ResponseResult<SpuDetaiDTO> querySpuDetail(@PathVariable Long spuId) {
-        DubboResponse<SpuDetaiDTO> response = productService.querySpuDetail(spuId);
+    public ResponseResult<SpuDetailDTO> querySpuDetail(@PathVariable Long spuId) {
+        DubboResponse<SpuDetailDTO> response = productService.querySpuDetail(spuId);
         if (!response.isSuccess()) {
             ExceptionCast.cast(response.getResultCode());
         }
@@ -133,5 +133,20 @@ public class ProductController implements ProductControllerApi {
             ExceptionCast.cast(response.getResultCode());
         }
         return ResponseResult.SUCCESS();
+    }
+
+    /**
+     * 根据spuId 获取所有的sku
+     * @param spuId
+     * @return
+     */
+    @GetMapping("skus/{spuId}")
+    @Override
+    public QueryResponseResult<SkuDTO> queryProductSkus(@PathVariable Long spuId) {
+        DubboResponse<QueryResult<SkuDTO>> response = productService.queryProductSkus(spuId);
+        if (!response.isSuccess()) {
+            ExceptionCast.cast(response.getResultCode());
+        }
+        return QueryResponseResult.SUCCESS(response.getData());
     }
 }

@@ -1,7 +1,7 @@
 package com.akali.business.goods.api;
 
+import com.akali.common.dto.goods.BrandCreateDTO;
 import com.akali.common.model.response.ResponseResult;
-import com.akali.provider.goods.dto.BrandCreateDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 

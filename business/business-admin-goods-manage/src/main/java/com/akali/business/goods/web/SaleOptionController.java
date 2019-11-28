@@ -1,13 +1,13 @@
 package com.akali.business.goods.web;
 
 import com.akali.business.goods.api.SaleOptionControllerApi;
+import com.akali.common.dto.goods.SaleOptionDTO;
 import com.akali.common.model.response.DubboResponse;
 import com.akali.common.model.response.QueryResponseResult;
 import com.akali.common.model.response.QueryResult;
 import com.akali.common.model.response.ResponseResult;
-import com.akali.config.exception.util.ExceptionCast;
+import com.akali.common.utils.ExceptionCast;
 import com.akali.provider.goods.api.SaleOptionService;
-import com.akali.provider.goods.dto.SaleOptionDTO;
 import org.apache.dubbo.config.annotation.Reference;
 import org.springframework.web.bind.annotation.*;
 

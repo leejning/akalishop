@@ -13,6 +13,11 @@
     <packaging>pom</packaging>
     <modules>
         <module>cloud-image-service</module>
+        <module>cloud-send-email-service</module>
+        <module>cloud-image-verify-code-feign</module>
+        <module>cloud-image-verify-code-service</module>
+        <module>cloud-mq-message-producer-feign</module>
+        <module>cloud-mq-message-producer-service</module>
     </modules>
     <dependencies>
         <!--lombok-->
@@ -33,6 +38,16 @@
         <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-context</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.akali.common</groupId>
+            <artifactId>common-base</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.akali.common</groupId>
+            <artifactId>common-dto</artifactId>
+            <version>${project.parent.version}</version>
         </dependency>
     </dependencies>
     <build>

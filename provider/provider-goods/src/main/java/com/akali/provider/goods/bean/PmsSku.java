@@ -1,7 +1,7 @@
 package com.akali.provider.goods.bean;
 
+import com.akali.common.dto.goods.SkuCreateDTO;
 import com.akali.common.utils.MapperUtils;
-import com.akali.provider.goods.dto.SkuCreateDTO;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 import lombok.NoArgsConstructor;

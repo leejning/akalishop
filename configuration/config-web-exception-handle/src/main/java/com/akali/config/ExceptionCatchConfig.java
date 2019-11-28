@@ -2,8 +2,8 @@ package com.akali.config;
 
 import com.akali.common.code.CommonCode;
 import com.akali.common.code.ResultCode;
+import com.akali.common.model.exception.MyCustomException;
 import com.akali.common.model.response.ResponseResult;
-import com.akali.config.exception.MyCustomException;
 import com.google.common.collect.ImmutableMap;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.converter.HttpMessageNotReadableException;

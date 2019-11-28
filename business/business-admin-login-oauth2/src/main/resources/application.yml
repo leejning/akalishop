@@ -1,0 +1,5 @@
+swagger2:
+  doc:
+    title: 管理员登录服务文档
+    desc: 管理员登录服务Api
+    basePackage: com.akali.business.admin

@@ -1,8 +1,8 @@
 package com.akali.provider.goods.api;
 
+import com.akali.common.dto.goods.CategoryDTO;
 import com.akali.common.model.response.DubboResponse;
 import com.akali.common.model.response.QueryResult;
-import com.akali.provider.goods.dto.CategoryDTO;
 
 
 /**
@@ -39,4 +39,13 @@ public interface CategoryService {
      * @return
      */
     DubboResponse<QueryResult<CategoryDTO>> getBaseCategoryByPid(Long pid);
+
+    /**
+     * 某商品 获取全分类名
+     * @param cid1
+     * @param cid2
+     * @param cid3
+     * @return  分类1/分类2/分类3
+     */
+    DubboResponse<String> queryFullCateName(Long cid1, Long cid2, Long cid3);
 }

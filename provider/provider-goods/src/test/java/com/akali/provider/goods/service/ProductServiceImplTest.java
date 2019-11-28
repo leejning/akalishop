@@ -1,8 +1,11 @@
 package com.akali.provider.goods.service;
 
+import com.akali.common.dto.goods.SkuCreateDTO;
+import com.akali.common.dto.goods.SkuDTO;
+import com.akali.common.dto.goods.SpuDetaiModifyDTO;
+import com.akali.common.model.response.DubboResponse;
+import com.akali.common.model.response.QueryResult;
 import com.akali.provider.goods.api.ProductService;
-import com.akali.provider.goods.dto.SkuCreateDTO;
-import com.akali.provider.goods.dto.SpuDetaiModifyDTO;
 import com.google.common.collect.Maps;
 import org.apache.dubbo.config.annotation.Reference;
 import org.junit.Test;
@@ -18,6 +21,7 @@ public class ProductServiceImplTest {
 
     @Reference(version = "1.0.0")
     private ProductService productService;
+
     @Test
     public void createProductSku() throws Exception {
         SkuCreateDTO skuCreateDTO = new SkuCreateDTO();
@@ -52,5 +56,10 @@ public class ProductServiceImplTest {
         spuDetaiModifyDTO.setDescription("22222");
         spuDetaiModifyDTO.setPackingList("22222");
         productService.updateSpuDetail(spuDetaiModifyDTO);
+    }
+
+    @Test
+    public void queryProductSkus(){
+        DubboResponse<QueryResult<SkuDTO>> response = productService.queryProductSkus(1L);
     }
 }

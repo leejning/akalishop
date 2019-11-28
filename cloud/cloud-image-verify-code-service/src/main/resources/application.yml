@@ -1,0 +1,35 @@
+server:
+  port: ${random.int[8100,9999]}
+spring:
+  application:
+    name: cloud-image-verify-code-service
+  cloud:
+    nacos:
+      discovery:
+        server-addr: 182.92.219.19:8848
+  redis:
+    host: 47.107.167.243
+    port: 6379
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+kaptcha:
+  border: "no"
+  borderColor: 105,179,90
+  fontColor: blue
+  width: 110
+  height: 40
+  fontSize: 40
+  key: code
+  length: 4
+  fontNames:
+    - 宋体
+    - 楷体
+    - 微软雅黑
+swagger2:
+  doc:
+    title: 图片验证码服务文档
+    desc: 图片验证码服务Api
+    basePackage: com.akali.cloud.image_code

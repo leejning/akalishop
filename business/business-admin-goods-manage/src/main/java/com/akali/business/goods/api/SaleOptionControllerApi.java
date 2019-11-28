@@ -1,8 +1,8 @@
 package com.akali.business.goods.api;
 
+import com.akali.common.dto.goods.SaleOptionDTO;
 import com.akali.common.model.response.QueryResponseResult;
 import com.akali.common.model.response.ResponseResult;
-import com.akali.provider.goods.dto.SaleOptionDTO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 

@@ -1,0 +1,6 @@
+swagger2:
+  doc:
+    title: 超级管理员权限管理控制文档
+    desc: 超级管理员权限管理控制服务Api
+    basePackage: com.akali.business.admin.permission
+

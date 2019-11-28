@@ -13,40 +13,48 @@
     <packaging>pom</packaging>
     <modules>
         <module>business-admin-goods-manage</module>
+        <module>business-member-registry</module>
+        <module>business-public-search</module>
+        <module>business-member-profile</module>
+        <module>business-member-cart</module>
+        <module>business-admin-login-oauth2</module>
+        <module>business-admin-permission-manager</module>
+        <module>business-admin-permission-manager-feign</module>
+        <module>business-member-login-oauth2</module>
     </modules>
 
     <dependencies>
-        <!--swagger2-->
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger2</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>io.springfox</groupId>
-            <artifactId>springfox-swagger-ui</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-context</artifactId>
-        </dependency>
         <!--swagger2配置项目-->
         <dependency>
             <groupId>com.akali.config</groupId>
-            <artifactId>config-swagger2</artifactId>
+            <artifactId>config-web-swagger2</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
-
+        <dependency>
+            <groupId>com.akali.config</groupId>
+            <artifactId>config-web-exception-handle</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.akali.common</groupId>
+            <artifactId>common-base</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>com.akali.common</groupId>
+                    <artifactId>common-dto</artifactId>
+                </exclusion>
+            </exclusions>
+            <version>${project.parent.version}</version>
+        </dependency>
         <!--hibernate validator-->
         <dependency>
             <groupId>org.hibernate.validator</groupId>
             <artifactId>hibernate-validator</artifactId>
-            <scope>compile</scope>
         </dependency>
         <!--lombok-->
         <dependency>
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
-            <scope>compile</scope>
         </dependency>
         <!--restTemplate-->
         <dependency>
@@ -54,16 +62,15 @@
             <artifactId>okhttp</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.apache.tomcat.embed</groupId>
-            <artifactId>tomcat-embed-core</artifactId>
-            <scope>compile</scope>
+            <groupId>io.github.openfeign</groupId>
+            <artifactId>feign-okhttp</artifactId>
         </dependency>
 
         <dependency>
-            <groupId>com.akali.common</groupId>
-            <artifactId>common-base</artifactId>
-            <version>${project.parent.version}</version>
+            <groupId>org.apache.tomcat.embed</groupId>
+            <artifactId>tomcat-embed-core</artifactId>
         </dependency>
+
     </dependencies>
     <build>
         <plugins>

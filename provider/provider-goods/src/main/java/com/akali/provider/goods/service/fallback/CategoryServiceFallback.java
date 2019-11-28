@@ -1,9 +1,9 @@
 package com.akali.provider.goods.service.fallback;
 
 import com.akali.common.code.CommonCode;
+import com.akali.common.dto.goods.CategoryDTO;
 import com.akali.common.model.response.DubboResponse;
 import com.akali.common.model.response.QueryResult;
-import com.akali.provider.goods.dto.CategoryDTO;
 import lombok.extern.slf4j.Slf4j;
 
 /**
@@ -22,7 +22,7 @@ public class CategoryServiceFallback {
         return DubboResponse.FAIL(CommonCode.TIMEOUT);
     }
 
-    public static DubboResponse<QueryResult<CategoryDTO>> getCategory(Long pid,Throwable e){
+    public static DubboResponse<QueryResult<CategoryDTO>> getCategory(Long pid, Throwable e){
         log.warn("invoke getCategory: "+ e.getClass().getName());
         e.printStackTrace();
         return DubboResponse.FAIL(CommonCode.TIMEOUT);

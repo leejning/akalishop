@@ -1,0 +1,33 @@
+#spring:
+#  application:
+#    name: provider-search-service
+#  data:
+#    elasticsearch:
+#      cluster-name: elasticsearch
+#      cluster-nodes: 192.168.25.102:9300
+#  rabbitmq:
+#    host: 182.92.219.19
+#    username: guest
+#    password: guest
+#    virtual-host: /
+#    template:
+#      retry:
+#        enabled: true
+#        initial-interval: 10000ms
+#        max-interval: 30000ms
+#        multiplier: 2
+#    publisher-confirms: true
+#dubbo:
+#  scan:
+#    base-packages: com.akali.provider.es.service
+#  protocol:
+#    name: dubbo
+#    port: ${random.int[20000,23000]}
+#    serialization: kryo
+#  registry:
+#    address: nacos://182.92.219.19:8848
+#management:
+#  endpoints:
+#    web:
+#      exposure:
+#        include: "*"

@@ -34,6 +34,6 @@ public class PmsBaseAttrOption {
      * 数值类型的值
      */
     @Column(length=10)
-    private Integer numValue;
+    private Float numValue;
 
 }

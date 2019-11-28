@@ -1,6 +1,8 @@
 package com.akali.provider.goods.bean;
 
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 
@@ -14,6 +16,8 @@ import javax.persistence.*;
 @Entity
 @Table(name = "pms_sku_stock")
 @Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class PmsSkuStock {
     @Id
     private Long skuId;
@@ -22,4 +26,8 @@ public class PmsSkuStock {
      */
     @Column(length=9)
     private Integer stock;
+
+    public static PmsSkuStock initStock(Long skuId){
+        return new PmsSkuStock(skuId,0);
+    }
 }

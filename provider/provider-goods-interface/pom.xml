@@ -11,14 +11,7 @@
 
     <groupId>com.akali.provider</groupId>
     <artifactId>provider-goods-interface</artifactId>
-    <dependencies>
-        <dependency>
-            <groupId>com.akali.common</groupId>
-            <artifactId>common-base</artifactId>
-            <version>${project.parent.version}</version>
-            <scope>provided</scope>
-        </dependency>
-    </dependencies>
+
 
 
 </project>

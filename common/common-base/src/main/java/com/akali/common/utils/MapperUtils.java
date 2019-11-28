@@ -7,7 +7,9 @@ import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.JavaType;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.type.MapLikeType;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -71,7 +73,7 @@ public class MapperUtils {
      * @return
      * @throws Exception
      */
-    public static <T> Map<String, Object> json2map(String jsonString) throws Exception {
+    public static <T> Map<String, Object> json2map(String jsonString) throws IOException {
         ObjectMapper mapper = new ObjectMapper();
         mapper.setSerializationInclusion(JsonInclude.Include.NON_NULL);
         return mapper.readValue(jsonString, Map.class);
@@ -81,12 +83,12 @@ public class MapperUtils {
      * 字符串转换为 Map<String, T>
      */
     public static <T> Map<String, T> json2map(String jsonString, Class<T> clazz) throws Exception {
-        Map<String, Map<String, Object>> map = objectMapper.readValue(jsonString, new TypeReference<Map<String, T>>() {
+        Map<String, Map<String, T>> map = objectMapper.readValue(jsonString, new TypeReference<Map<String, Map<String, T>>>() {
         });
         Map<String, T> result = new HashMap<String, T>();
-        for (Map.Entry<String, Map<String, Object>> entry : map.entrySet()) {
-            result.put(entry.getKey(), map2pojo(entry.getValue(), clazz));
-        }
+//        for (Map.Entry<String, Map<String, Object>> entry : map.entrySet()) {
+//            result.put(entry.getKey(), map2pojo(entry.getValue(), clazz));
+//        }
         return result;
     }
 
@@ -261,5 +263,10 @@ public class MapperUtils {
      */
     public static Map<String, List<Long>> json2maplist(String json) throws Exception {
         return objectMapper.readValue(json, Map.class);
+    }
+
+    public static Map<Long, Long> json2mapLong(String json) throws IOException {
+        MapLikeType mapLikeType = objectMapper.getTypeFactory().constructMapLikeType(Map.class, Long.class, Long.class);
+        return objectMapper.readValue(json, mapLikeType);
     }
 }

@@ -1,8 +1,8 @@
 package com.akali.business.goods.api;
 
+import com.akali.common.dto.goods.*;
 import com.akali.common.model.response.QueryResponseResult;
 import com.akali.common.model.response.ResponseResult;
-import com.akali.provider.goods.dto.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
@@ -26,7 +26,7 @@ public interface ProductControllerApi {
     public QueryResponseResult<AttrValueDTO> queryProductAllAttrValue(Long spuId);
 
     @ApiOperation("获取商品详情信息")
-    public ResponseResult<SpuDetaiDTO> querySpuDetail(Long spuId);
+    public ResponseResult<SpuDetailDTO> querySpuDetail(Long spuId);
 
     @ApiOperation("把销售选项和一个或多个sku属性进行绑定")
     public ResponseResult<Void> bindSaleOptionAndSkuAttr(SpuSaleOptionDTO spuSaleOptionDTO) throws JsonProcessingException;
@@ -36,5 +36,8 @@ public interface ProductControllerApi {
 
     @ApiOperation("修改商品详情信息")
     public ResponseResult<Void> updateSpuDetail(SpuDetaiModifyDTO spuDetaiModifyDTO);
+
+    @ApiOperation("获取某商品的sku集合")
+    public QueryResponseResult<SkuDTO> queryProductSkus(Long spuId);
 
 }

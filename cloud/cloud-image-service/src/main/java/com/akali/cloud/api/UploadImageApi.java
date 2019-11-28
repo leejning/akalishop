@@ -5,6 +5,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 
 
 /**
@@ -18,5 +19,5 @@ import javax.servlet.http.HttpServletRequest;
 public interface UploadImageApi {
 
     @ApiOperation(value="图片上传")
-    public ResponseEntity<String> uploadImage(HttpServletRequest req);
+    public ResponseEntity<String> uploadImage(HttpServletRequest req) throws IOException;
 }

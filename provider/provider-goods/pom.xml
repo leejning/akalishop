@@ -20,12 +20,11 @@
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-test</artifactId>
-            <scope>test</scope>
+            <artifactId>spring-boot-starter-actuator</artifactId>
         </dependency>
         <dependency>
             <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-actuator</artifactId>
+            <artifactId>spring-boot-starter-amqp</artifactId>
         </dependency>
         <!-- Spring Boot End -->
 
@@ -35,31 +34,24 @@
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>
         <!-- Spring Cloud End -->
-        <!--sentinel -->
-        <dependency>
-            <groupId>com.alibaba.csp</groupId>
-            <artifactId>sentinel-apache-dubbo-adapter</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.csp</groupId>
-            <artifactId>sentinel-transport-simple-http</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.alibaba.csp</groupId>
-            <artifactId>sentinel-annotation-aspectj</artifactId>
-        </dependency>
+
         <!--项目接口-->
+        <dependency>
+            <groupId>com.akali.dependency</groupId>
+            <artifactId>dep-db-mysql</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.akali.config</groupId>
+            <artifactId>config-jpa-extends</artifactId>
+            <version>${project.parent.version}</version>
+        </dependency>
         <dependency>
             <groupId>com.akali.provider</groupId>
             <artifactId>provider-goods-interface</artifactId>
-            <version>${parent.version}</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.akali.common</groupId>
-            <artifactId>common-base</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
+
     </dependencies>
 
     <build>

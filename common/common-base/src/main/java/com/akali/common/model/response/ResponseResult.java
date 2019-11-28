@@ -44,6 +44,11 @@ public class ResponseResult<T> implements Response {
         this.success = success;
     }
 
+    public ResponseResult message(String message){
+        this.message = message;
+        return this;
+    }
+
 
     public static<T> ResponseResult<T> SUCCESS(T entity){
         return new ResponseResult<>(CommonCode.SUCCESS,entity);

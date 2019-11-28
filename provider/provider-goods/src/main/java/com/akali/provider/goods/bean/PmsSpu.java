@@ -26,14 +26,19 @@ public class PmsSpu {
      */
     private Long brandId;
     /**
+     * 商品简称
+     */
+    @Column(length=64)
+    private String simpleName;
+    /**
      * 主标题
      */
-    @Column(length=250)
+    @Column(length=256)
     private String title;
     /**
      * 促销信息
      */
-    @Column(length=250)
+    @Column(length=256)
     private String subTitle;
     /**
      * 分类id

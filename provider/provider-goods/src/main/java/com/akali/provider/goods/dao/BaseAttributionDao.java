@@ -1,7 +1,7 @@
 package com.akali.provider.goods.dao;
 
+import com.akali.config.jpa.ExtendedJpaRepositoryApi;
 import com.akali.provider.goods.bean.PmsBaseAttribution;
-import com.akali.provider.goods.jpa.ExtendedJpaRepositoryApi;
 import org.springframework.data.jpa.repository.Query;
 
 import java.util.List;

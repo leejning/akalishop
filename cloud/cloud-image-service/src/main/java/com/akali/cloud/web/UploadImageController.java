@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import javax.servlet.http.HttpServletRequest;
+import java.io.IOException;
 
 
 /** 
@@ -37,7 +38,7 @@ public class UploadImageController implements UploadImageApi {
      */
     @PostMapping("image")
     @Override
-    public ResponseEntity<String> uploadImage(HttpServletRequest req) {
+    public ResponseEntity<String> uploadImage(HttpServletRequest req) throws IOException {
     	MultipartHttpServletRequest request = (MultipartHttpServletRequest)req;
 		MultipartFile file = request.getFile("file");
         String url = uploadService.upload(file);

@@ -1,8 +1,8 @@
 package com.akali.provider.goods.api;
 
+import com.akali.common.dto.goods.SaleOptionDTO;
 import com.akali.common.model.response.DubboResponse;
 import com.akali.common.model.response.QueryResult;
-import com.akali.provider.goods.dto.SaleOptionDTO;
 
 /**
  * @ClassName SaleOptionService

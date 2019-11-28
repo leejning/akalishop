@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="common-base" />
+        <module name="config-jpa-extends" />
+        <module name="config-member-oauth2" />
+        <module name="business-admin-login-oauth2" />
+        <module name="provider-ums-member-interface" />
+        <module name="config-web-swagger2" />
+        <module name="cloud-image-verify-code-service" />
+        <module name="business-member-login-oauth2" />
+        <module name="cloud-image-service" />
+        <module name="cloud-mq-message-producer-service" />
+        <module name="cloud-mq-message-producer-feign" />
+        <module name="config-mong-extends" />
+        <module name="business-admin-permission-manager-feign" />
+        <module name="provider-order-interface" />
+        <module name="business-member-cart" />
+        <module name="provider-ums-member" />
+        <module name="config-admin-oauth2" />
+        <module name="business-member-registry" />
+        <module name="provider-cart" />
+        <module name="provider-goods" />
+        <module name="provider-order" />
+        <module name="provider-cart-interface" />
+        <module name="cloud-image-verify-code-feign" />
+        <module name="provider-es-goods-interface" />
+        <module name="message-producer" />
+        <module name="common-apps" />
+        <module name="cloud-send-email-service" />
+        <module name="business-public-search" />
+        <module name="provider-ums-admin-interface" />
+        <module name="config-web-exception-handle" />
+        <module name="config-sentinel" />
+        <module name="business-member-profile" />
+        <module name="business-admin-permission-manager" />
+        <module name="message-consumer" />
+        <module name="provider-goods-interface" />
+        <module name="provider-es-goods" />
+        <module name="message-producer-inteface" />
+        <module name="business-admin-goods-manage" />
+        <module name="provider-ums-admin" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="api" target="1.8" />
+      <module name="common-dto" target="1.8" />
+      <module name="common-member-oauth2-utils" target="1.8" />
+      <module name="common-utils" target="1.8" />
+      <module name="dependency" target="1.8" />
+      <module name="message-consumer-interface" target="1.8" />
+      <module name="provider-goods-es" target="1.8" />
+      <module name="provider-item" target="1.8" />
+      <module name="provider-item-es" target="1.8" />
+      <module name="provider-item-interface" target="1.8" />
+      <module name="provider-user" target="1.8" />
+      <module name="provider-user-interface" target="1.8" />
+      <module name="ums-admin-provider" target="1.8" />
+    </bytecodeTargetLevel>
+  </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="business" options="" />
+      <module name="business-admin-goods-manage" options="-parameters" />
+      <module name="business-admin-login-oauth2" options="-parameters" />
+      <module name="business-admin-permission-manager" options="-parameters" />
+      <module name="business-admin-permission-manager-feign" options="-parameters" />
+      <module name="business-member-cart" options="-parameters" />
+      <module name="business-member-login-oauth2" options="-parameters" />
+      <module name="business-member-profile" options="-parameters" />
+      <module name="business-member-registry" options="-parameters" />
+      <module name="business-public-search" options="-parameters" />
+      <module name="cloud" options="" />
+      <module name="cloud-image-service" options="-parameters" />
+      <module name="cloud-image-verify-code-feign" options="-parameters" />
+      <module name="cloud-image-verify-code-service" options="-parameters" />
+      <module name="cloud-mq-message-producer-feign" options="-parameters" />
+      <module name="cloud-mq-message-producer-service" options="-parameters" />
+      <module name="cloud-send-email-service" options="-parameters" />
+      <module name="common" options="" />
+      <module name="common-apps" options="-parameters" />
+      <module name="common-base" options="-parameters" />
+      <module name="common-dto" options="-parameters" />
+      <module name="common-member-oauth2-utils" options="-parameters" />
+      <module name="common-utils" options="-parameters" />
+      <module name="config-admin-oauth2" options="-parameters" />
+      <module name="config-jpa-extends" options="-parameters" />
+      <module name="config-member-oauth2" options="-parameters" />
+      <module name="config-mong-extends" options="-parameters" />
+      <module name="config-sentinel" options="-parameters" />
+      <module name="config-web-exception-handle" options="-parameters" />
+      <module name="config-web-swagger2" options="-parameters" />
+      <module name="configuration" options="" />
+      <module name="dep-db-mysql" options="" />
+      <module name="dep-rpc-dubbo" options="" />
+      <module name="dependencies" options="" />
+      <module name="dependency" options="-parameters" />
+      <module name="message-consumer" options="-parameters" />
+      <module name="message-consumer-interface" options="-parameters" />
+      <module name="message-producer" options="-parameters" />
+      <module name="message-producer-inteface" options="-parameters" />
+      <module name="provider-cart" options="-parameters" />
+      <module name="provider-cart-interface" options="-parameters" />
+      <module name="provider-es-goods" options="-parameters" />
+      <module name="provider-es-goods-interface" options="-parameters" />
+      <module name="provider-goods" options="-parameters" />
+      <module name="provider-goods-es" options="-parameters" />
+      <module name="provider-goods-interface" options="-parameters" />
+      <module name="provider-item" options="-parameters" />
+      <module name="provider-item-es" options="-parameters" />
+      <module name="provider-item-interface" options="-parameters" />
+      <module name="provider-order" options="-parameters" />
+      <module name="provider-order-interface" options="-parameters" />
+      <module name="provider-ums-admin" options="-parameters" />
+      <module name="provider-ums-admin-interface" options="-parameters" />
+      <module name="provider-ums-member" options="-parameters" />
+      <module name="provider-ums-member-interface" options="-parameters" />
+      <module name="provider-user" options="-parameters" />
+      <module name="provider-user-interface" options="-parameters" />
+    </option>
+  </component>
+</project>

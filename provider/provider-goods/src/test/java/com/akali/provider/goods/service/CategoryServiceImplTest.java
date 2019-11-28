@@ -1,9 +1,9 @@
 package com.akali.provider.goods.service;
 
 
+import com.akali.common.dto.goods.CategoryDTO;
 import com.akali.common.model.response.DubboResponse;
 import com.akali.provider.goods.api.CategoryService;
-import com.akali.provider.goods.dto.CategoryDTO;
 import org.apache.dubbo.config.annotation.Reference;
 import org.junit.Test;
 import org.junit.runner.RunWith;

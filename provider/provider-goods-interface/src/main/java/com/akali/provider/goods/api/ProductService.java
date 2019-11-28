@@ -1,8 +1,8 @@
 package com.akali.provider.goods.api;
 
+import com.akali.common.dto.goods.*;
 import com.akali.common.model.response.DubboResponse;
 import com.akali.common.model.response.QueryResult;
-import com.akali.provider.goods.dto.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 
 /**
@@ -38,7 +38,7 @@ public interface ProductService {
      * @param spuId
      * @return
      */
-    DubboResponse<SpuDetaiDTO> querySpuDetail(Long spuId);
+    DubboResponse<SpuDetailDTO> querySpuDetail(Long spuId);
 
     /**
      * 把销售选项和一个或多个sku属性进行绑定
@@ -67,4 +67,11 @@ public interface ProductService {
      * @return
      */
     DubboResponse<Void> updateSpuDetail(SpuDetaiModifyDTO spuDetaiModifyDTO);
+
+    /**
+     * 根据spuId 获取所有的sku
+     * @param spuId
+     * @return
+     */
+    DubboResponse<QueryResult<SkuDTO>> queryProductSkus(Long spuId);
 }

@@ -1,6 +1,7 @@
 package com.akali.provider.goods.service;
 
 import com.akali.common.code.CommonCode;
+import com.akali.common.dto.goods.CategoryDTO;
 import com.akali.common.model.response.DubboResponse;
 import com.akali.common.model.response.QueryResult;
 import com.akali.provider.goods.api.CategoryService;
@@ -8,9 +9,9 @@ import com.akali.provider.goods.bean.PmsBaseCategory;
 import com.akali.provider.goods.bean.PmsCategory;
 import com.akali.provider.goods.dao.BaseCategoryDao;
 import com.akali.provider.goods.dao.CategoryDao;
-import com.akali.provider.goods.dto.CategoryDTO;
 import com.akali.provider.goods.service.fallback.CategoryServiceFallback;
 import com.alibaba.csp.sentinel.annotation.SentinelResource;
+import com.google.common.collect.Lists;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -85,5 +86,20 @@ public class CategoryServiceImpl implements CategoryService {
         List<PmsBaseCategory> categories =  baseCategoryDao.findByParentId(pid);
         List<CategoryDTO> data = categories.stream().map(c -> new CategoryDTO(c.getName(), c.getParentId())).collect(Collectors.toList());
         return DubboResponse.SUCCESS(QueryResult.create(data,(long)data.size()));
+    }
+
+    /**
+     * 某商品 获取全分类名
+     * @param cid1
+     * @param cid2
+     * @param cid3
+     * @return  分类1/分类2/分类3
+     */
+    @Override
+    public DubboResponse<String> queryFullCateName(Long cid1, Long cid2, Long cid3) {
+        List<PmsBaseCategory> category = (List<PmsBaseCategory>) baseCategoryDao.findAllById(Lists.newArrayList(cid1, cid2));
+        PmsCategory pmsCategory = categoryDao.findById(cid3).get();
+        String fullName = category.get(0).getName() + "/" + category.get(1).getName() + "/"+pmsCategory.getName();
+        return DubboResponse.SUCCESS(fullName);
     }
 }
