@@ -1,0 +1,5 @@
+swagger2:
+  doc:
+    title: 商品详情公共业务文档
+    desc: 商品详情公共业务Api
+    basePackage: com.akali.business.free.goods.web

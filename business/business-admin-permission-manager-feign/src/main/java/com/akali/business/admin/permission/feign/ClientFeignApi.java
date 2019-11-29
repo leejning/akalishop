@@ -1,5 +1,7 @@
 package com.akali.business.admin.permission.feign;
 
+import com.akali.common.dto.admin.ClientWithPermissionDTO;
+import com.akali.common.model.response.QueryResponseResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -14,6 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @RequestMapping("client")
 public interface ClientFeignApi {
     @GetMapping("permissions/{clientId}")
-    public ResponseResult<ClientWithPermissionDTO> getClientWithPermission(@PathVariable Long clientId);
+    public QueryResponseResult<ClientWithPermissionDTO> getClientWithPermission(@PathVariable Long clientId);
 
 }

@@ -1,6 +1,6 @@
 package com.akali.provider.goods.api;
 
-import com.akali.common.dto.goods.CategoryDTO;
+import com.akali.common.dto.goods.base.CategoryDTO;
 import com.akali.common.model.response.DubboResponse;
 import com.akali.common.model.response.QueryResult;
 

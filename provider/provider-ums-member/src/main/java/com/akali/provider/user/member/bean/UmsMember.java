@@ -28,10 +28,6 @@ public class UmsMember {
     @Column(unique = true)
     private String memberAccount;
     /**
-     * 会员等级表id
-     */
-    private Long memberLevelId;
-    /**
      * 会员名称
      */
     @Column(length = 64,unique = true)
@@ -72,10 +68,10 @@ public class UmsMember {
     @Column(length = 300)
     private String icon;
     /**
-     * 性别 ，null->未知，true->男，false->女
+     * 性别 ，0->未知，1->男，2->女
      */
     @Column(length = 1)
-    private Boolean gender;
+    private Integer gender;
     /**
      * 所在城市
      */

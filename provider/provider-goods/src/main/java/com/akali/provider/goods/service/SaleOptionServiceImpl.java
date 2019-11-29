@@ -1,12 +1,13 @@
 package com.akali.provider.goods.service;
 
 import com.akali.common.code.CommonCode;
-import com.akali.common.dto.goods.SaleOptionDTO;
+import com.akali.common.dto.goods.base.SaleOptionDTO;
 import com.akali.common.model.response.DubboResponse;
 import com.akali.common.model.response.QueryResult;
 import com.akali.provider.goods.api.SaleOptionService;
 import com.akali.provider.goods.bean.PmsSaleOption;
 import com.akali.provider.goods.dao.BaseSaleOptionDao;
+import com.akali.provider.goods.queryhelper.SaleOptionEntityQueryHelper;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -43,10 +44,12 @@ public class SaleOptionServiceImpl implements SaleOptionService {
      */
     @Override
     public DubboResponse<QueryResult<SaleOptionDTO>> querySaleOptionByCateId(Long cateId) {
-        List<SaleOptionDTO> queryData = baseSaleOptionDao.findByCateId(cateId);
-        if (queryData.isEmpty()) {
-            //
-        }
-        return DubboResponse.SUCCESS(QueryResult.create(queryData,(long)queryData.size()));
+        //构建查询条件helper
+        SaleOptionEntityQueryHelper queryHelper = SaleOptionEntityQueryHelper.create(SaleOptionDTO.class);
+        //查询数据
+        List<SaleOptionDTO> data = baseSaleOptionDao
+                .findAll(SaleOptionEntityQueryHelper.getWhere(queryHelper), SaleOptionDTO.class);
+        //返回结果
+        return DubboResponse.SUCCESS(QueryResult.create(data,(long)data.size()));
     }
 }

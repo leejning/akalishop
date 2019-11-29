@@ -1,0 +1,5 @@
+swagger2:
+  doc:
+    title: 会员订单业务文档
+    desc: 会员订单业务Api
+    basePackage: com.akali.business.member.order.web

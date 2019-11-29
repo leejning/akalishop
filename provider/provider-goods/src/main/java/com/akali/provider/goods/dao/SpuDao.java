@@ -1,8 +1,8 @@
 package com.akali.provider.goods.dao;
 
 import com.akali.common.utils.MapperUtils;
+import com.akali.config.jpa.ExtendedJpaRepositoryApi;
 import com.akali.provider.goods.bean.PmsSpu;
-import org.springframework.data.repository.PagingAndSortingRepository;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,7 +14,7 @@ import java.util.Map;
  * @Date 2019/11/12 0012
  * @Version V1.0
  **/
-public interface SpuDao extends PagingAndSortingRepository<PmsSpu,Long> {
+public interface SpuDao extends ExtendedJpaRepositoryApi<PmsSpu,Long> {
     public static void main(String[] args) throws Exception {
         Map<Long, Long> longLongMap = new HashMap<>();
         longLongMap.put(3L,5L);

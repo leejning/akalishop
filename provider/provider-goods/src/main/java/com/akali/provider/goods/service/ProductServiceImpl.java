@@ -2,15 +2,21 @@ package com.akali.provider.goods.service;
 
 import com.akali.common.code.CommonCode;
 import com.akali.common.code.ProductCode;
-import com.akali.common.dto.goods.*;
+import com.akali.common.data_help.DataJpaPageUtils;
+import com.akali.common.data_help.PageAndSortObj;
+import com.akali.common.dto.goods.base.AttrValueDTO;
+import com.akali.common.dto.goods.sku.SkuCreateDTO;
+import com.akali.common.dto.goods.sku.SkuDTO;
+import com.akali.common.dto.goods.sku.SkuStockPriceDTO;
+import com.akali.common.dto.goods.spu.*;
+import com.akali.common.dto.query.SpuQueryDTO;
 import com.akali.common.model.response.DubboResponse;
 import com.akali.common.model.response.QueryResult;
 import com.akali.common.utils.MapperUtils;
 import com.akali.provider.goods.api.ProductService;
 import com.akali.provider.goods.bean.*;
 import com.akali.provider.goods.dao.*;
-import com.akali.provider.goods.queryhelper.AttrOptionEntityQueryHelper;
-import com.akali.provider.goods.queryhelper.AttributionEntityQueryHelper;
+import com.akali.provider.goods.queryhelper.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
@@ -18,6 +24,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 
 import javax.transaction.Transactional;
 import java.util.*;
@@ -74,8 +81,14 @@ public class ProductServiceImpl implements ProductService {
      */
     @Override
     public DubboResponse<QueryResult<AttrValueDTO>> queryProductAllAttrValue(Long spuId) {
-        List<AttrValueDTO> quertData = baseAttrValueDao.findBySpuId(spuId);
-        return DubboResponse.SUCCESS(QueryResult.create(quertData, (long) quertData.size()));
+        //构建查询helper
+        AttrValueEntityQueryHelper queryHelper = AttrValueEntityQueryHelper.create(AttrValueDTO.class);
+        queryHelper.setSpuId(spuId);
+        //查询数据
+        List<AttrValueDTO> data = baseAttrValueDao
+                .findAll(AttrValueEntityQueryHelper.getWhere(queryHelper), AttrValueDTO.class);
+        //返回
+        return DubboResponse.SUCCESS(QueryResult.create(data, (long) data.size()));
     }
 
     /**
@@ -118,6 +131,8 @@ public class ProductServiceImpl implements ProductService {
     @Transactional
     @Override
     public DubboResponse<Void> createProductSku(SkuCreateDTO skuCreateDTO) throws Exception {
+        Long spuId = skuCreateDTO.getSpuId();
+        //检查sku是否存在
 //        if (checkExistsSku(skuCreateDTO)) {
 //            return DubboResponse.FAIL(ProductCode.THE_SKU_IS_EXSIST);
 //        }
@@ -157,7 +172,11 @@ public class ProductServiceImpl implements ProductService {
         }
 
         //4、获取spu销售选项SpuSaleOption
-        List<SpuSaleOptionDTO> spuSaleOpts = spuSaleOptionDao.findBySpuId(skuCreateDTO.getSpuId());
+//        List<SpuSaleOptionDTO> spuSaleOpts = spuSaleOptionDao.findBySpuId(spuId);
+
+        SpuSaleOptionEntityQueryHelper spuSaleOptQueryHelper = SpuSaleOptionEntityQueryHelper.create(SpuSaleOptionDTO.class, spuId);
+        List<SpuSaleOptionDTO> spuSaleOpts = spuSaleOptionDao
+                .findAll(SpuSaleOptionEntityQueryHelper.getWhere(spuSaleOptQueryHelper),SpuSaleOptionDTO.class);
 
 
         //5、构造和保存销售选项的值对象PmsSpuSaleOptionValue
@@ -178,14 +197,14 @@ public class ProductServiceImpl implements ProductService {
             String v = value.substring(0, value.length() - 1).toString();
             optionValue.setValue(v);
 
-            optionValue.setSpuId(skuCreateDTO.getSpuId());
+            optionValue.setSpuId(spuId);
             spuSaleOptionValues.add(optionValue);
         }
         //保存
         spuSaleOptionValueDao.saveAll(spuSaleOptionValues);
 
         //6、更新对应spuDetail 的 saleOptionAttr字段
-        PmsSpuDetail spuDetail = spuDetailDao.findSaleOptionAttrBySpuId(skuCreateDTO.getSpuId());
+        PmsSpuDetail spuDetail = spuDetailDao.findSaleOptionAttrBySpuId(spuId);
         String saleOptionAttr = spuDetail.getSaleOptionAttr();
         Map<String, List<Long>> saleOptionAttrMap;
         if (StringUtils.isBlank(saleOptionAttr)) {
@@ -199,38 +218,41 @@ public class ProductServiceImpl implements ProductService {
             String key = ov.getSpuSaleOptionId().toString();
             if (!saleOptionAttrMap.containsKey(key)) {
                 List<Long> ids = Lists.newArrayList();
-                saleOptionAttrMap.put(key,ids);
+                saleOptionAttrMap.put(key, ids);
             }
-            indexes.append(key+":"+saleOptionAttrMap.get(key).size()+",");
+            indexes.append(key + ":" + saleOptionAttrMap.get(key).size() + ",");
             saleOptionAttrMap.get(key).add(ov.getId());
         });
 
         saleOptionAttr = MapperUtils.obj2json(saleOptionAttrMap);
-        spuDetailDao.updateSaleOptionAttrById(saleOptionAttr, skuCreateDTO.getSpuId());
+        spuDetailDao.updateSaleOptionAttrById(saleOptionAttr, spuId);
 
         //6、保存sku
         PmsSku pmsSku = new PmsSku(skuCreateDTO);
         pmsSku.setIndexes(indexes.toString());
         skuDao.save(pmsSku);
         //创建库存
-        skuStockDao.save(PmsSkuStock.initStock(pmsSku.getId()));
+        PmsSkuStock pmsSkuStock = new PmsSkuStock(pmsSku.getId(), spuId, 0, skuCreateDTO.getPrice());
+        skuStockDao.save(pmsSkuStock);
 
         return DubboResponse.SUCCESS(CommonCode.SUCCESS);
     }
 
     /**
      * 判断sku是否存在
+     *
      * @param skuCreateDTO
      * @return
      */
     @Override
-    public Boolean checkExistsSku(SkuCreateDTO skuCreateDTO){
-        int count = skuDao.existsByOwnSpecAndSpuId(MapperUtils.mapToJson(skuCreateDTO.getOwnSpec()),skuCreateDTO.getSpuId());
-        return count>0;
+    public Boolean checkExistsSku(SkuCreateDTO skuCreateDTO) {
+        int count = skuDao.existsByOwnSpecAndSpuId(MapperUtils.mapToJson(skuCreateDTO.getOwnSpec()), skuCreateDTO.getSpuId());
+        return count > 0;
     }
 
     /**
      * 修改商品详情信息
+     *
      * @param spuDetaiModifyDTO
      * @return
      */
@@ -243,20 +265,61 @@ public class ProductServiceImpl implements ProductService {
 
     /**
      * 根据spuId 获取所有的sku
+     *
      * @param spuId
      * @return
      */
     @Override
     public DubboResponse<QueryResult<SkuDTO>> queryProductSkus(Long spuId) {
-        List<SkuDTO> queryData = skuDao.findBySpuId(spuId);
-        if(queryData.isEmpty()){
-            //
-        }
-        return DubboResponse.SUCCESS(QueryResult.create(queryData, (long) queryData.size()));
+        //构建查询条件helper
+        SkuEntityQueryHelper queryHelper = SkuEntityQueryHelper.create(SkuDTO.class);
+        queryHelper.setSpuId(spuId);
+        //查询数据
+        List<SkuDTO> data = skuDao.findAll(SkuEntityQueryHelper.getWhere(queryHelper), SkuDTO.class);
+        return DubboResponse.SUCCESS(QueryResult.create(data, (long) data.size()));
     }
 
     /**
+     * 获取某个商品的销售页信息
+     *
+     * @param spuId
+     * @return
+     */
+    @Override
+    public DubboResponse<ProductSalePageInfoVO> getProductSalePageInfo(Long spuId) {
+        List<PmsSkuStock> skuStocks = skuStockDao.findBySpuId(spuId);
+        if (skuStocks.isEmpty()) {
+            DubboResponse.FAIL(ProductCode.SPU_NOT_EXSIST);
+        }
+        List<SkuStockPriceDTO> data = skuStocks.stream()
+                .map(s -> new SkuStockPriceDTO(s.getSkuId(), s.getPrice(), s.getStock()))
+                .collect(Collectors.toList());
+        return DubboResponse.SUCCESS(new ProductSalePageInfoVO(data));
+    }
+
+    /**
+     * @param spuQueryDTO
+     * @return
+     */
+    @Override
+    public DubboResponse<QueryResult<SpuPageDTO>> queryProductPage(SpuQueryDTO spuQueryDTO) {
+        //初始化分页
+        PageAndSortObj pageAndSortObj = DataJpaPageUtils.initPageAndSort(spuQueryDTO);
+        //构造查询helper
+        SpuEntityQueryHelper queryHelper = SpuEntityQueryHelper.create(spuQueryDTO, SpuPageDTO.class);
+        //查询数据
+        Page<SpuPageDTO> page = (Page<SpuPageDTO>) spuDao
+                .findAll(SpuEntityQueryHelper.getWhere(queryHelper), pageAndSortObj.getPageable(), SpuPageDTO.class);
+        //封装结果
+        QueryResult<SpuPageDTO> queryResult = DataJpaPageUtils.setQueryResult(page, spuQueryDTO);
+        //返回
+        return DubboResponse.SUCCESS(queryResult);
+    }
+
+
+    /**
      * 创建商品所有属性值
+     *
      * @param spuAttrValueCollectDTO
      * @return
      */

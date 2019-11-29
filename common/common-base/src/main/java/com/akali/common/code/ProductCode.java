@@ -14,7 +14,7 @@ public enum ProductCode implements ResultCode{
      *
      */
     SPU_DETAIL_NOT_EXSIST(false,30025,"商品详情不存在"),
-    SPU_NOT_EXSIST(false,30026,"商品详情不存在"),
+    SPU_NOT_EXSIST(false,30026,"商品不存在"),
     THE_SKU_IS_EXSIST(false,30029,"添加的商品sku已存在"),
     ;
 

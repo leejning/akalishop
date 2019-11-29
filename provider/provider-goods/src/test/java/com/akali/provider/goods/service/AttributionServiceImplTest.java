@@ -1,6 +1,6 @@
 package com.akali.provider.goods.service;
 
-import com.akali.common.dto.goods.CategoryAttrInfoDTO;
+import com.akali.common.dto.goods.base.CategoryAttrInfoDTO;
 import com.akali.common.model.response.DubboResponse;
 import com.akali.provider.goods.api.AttributionService;
 import com.akali.provider.goods.bean.PmsBaseAttrOption;

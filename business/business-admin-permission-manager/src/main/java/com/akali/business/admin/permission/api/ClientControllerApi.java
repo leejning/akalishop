@@ -2,6 +2,7 @@ package com.akali.business.admin.permission.api;
 
 import com.akali.common.dto.admin.ClientWithPermissionDTO;
 import com.akali.common.dto.admin.PermissionToClientDTO;
+import com.akali.common.model.response.QueryResponseResult;
 import com.akali.common.model.response.ResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;

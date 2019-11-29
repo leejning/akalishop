@@ -1,9 +1,9 @@
 package com.akali.provider.es.service;
 
-import com.akali.common.dto.goods.AttrOptionDTO;
-import com.akali.common.dto.goods.AttrValueDTO;
-import com.akali.common.dto.goods.CateAttributeDTO;
-import com.akali.common.dto.goods.SpuEsDTO;
+import com.akali.common.dto.goods.base.AttrOptionDTO;
+import com.akali.common.dto.goods.base.AttrValueDTO;
+import com.akali.common.dto.goods.base.CateAttributeDTO;
+import com.akali.common.dto.goods.spu.SpuEsDTO;
 import com.akali.common.model.response.DubboResponse;
 import com.akali.common.utils.ExceptionCast;
 import com.akali.common.utils.MapperUtils;

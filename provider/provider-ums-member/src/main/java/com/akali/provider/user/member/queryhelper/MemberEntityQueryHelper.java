@@ -61,8 +61,6 @@ public class MemberEntityQueryHelper extends BaseEntityQueryHelper {
                 Class<?> resultClass = queryHelper.getResultClass();
                 Assert.notNull(resultClass,"结果类不能为null");
 
-                SelectorBuilder selectorBuilder = new SelectorBuilder();
-
                 Field[] fields = resultClass.getDeclaredFields();
                 String[] fieldNames = Lists.newArrayList(fields).stream().map(a -> a.getName())
                         .collect(Collectors.toList()).toArray(new String[fields.length]);
@@ -70,7 +68,7 @@ public class MemberEntityQueryHelper extends BaseEntityQueryHelper {
                 if(queryHelper.getResultClass()!=null){
                     fieldNames = initResultFields(queryHelper.getResultClass());
                 }
-                return selectorBuilder.append(fieldNames);
+                return SelectorBuilder.create().append(fieldNames);
             }
 
 

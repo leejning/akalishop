@@ -2,6 +2,7 @@ package com.akali.config.jpa;
 
 
 import com.google.common.collect.Lists;
+import lombok.Data;
 
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.Path;
@@ -18,6 +19,7 @@ import java.util.List;
  * @Date 2019/11/8 0004
  * @Version V1.0
  **/
+@Data
 public class SelectorBuilder {
     List<String> selectorList = Lists.newArrayList();
     public SelectorBuilder append(String ...field){
@@ -32,5 +34,9 @@ public class SelectorBuilder {
             selections.add(field);
         }
         return selections;
+    }
+
+    public static SelectorBuilder create(){
+        return new SelectorBuilder();
     }
 }

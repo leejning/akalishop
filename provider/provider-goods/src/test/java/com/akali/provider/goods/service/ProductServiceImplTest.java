@@ -1,8 +1,8 @@
 package com.akali.provider.goods.service;
 
-import com.akali.common.dto.goods.SkuCreateDTO;
-import com.akali.common.dto.goods.SkuDTO;
-import com.akali.common.dto.goods.SpuDetaiModifyDTO;
+import com.akali.common.dto.goods.sku.SkuCreateDTO;
+import com.akali.common.dto.goods.sku.SkuDTO;
+import com.akali.common.dto.goods.spu.SpuDetaiModifyDTO;
 import com.akali.common.model.response.DubboResponse;
 import com.akali.common.model.response.QueryResult;
 import com.akali.provider.goods.api.ProductService;

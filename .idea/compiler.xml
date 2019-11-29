@@ -7,17 +7,20 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="common-base" />
-        <module name="config-jpa-extends" />
+        <module name="config-mong-extends" />
         <module name="config-member-oauth2" />
+        <module name="provider-goods-interface" />
         <module name="business-admin-login-oauth2" />
         <module name="provider-ums-member-interface" />
+        <module name="business-member-order" />
         <module name="config-web-swagger2" />
         <module name="cloud-image-verify-code-service" />
+        <module name="business-public-goods-detail" />
         <module name="business-member-login-oauth2" />
         <module name="cloud-image-service" />
         <module name="cloud-mq-message-producer-service" />
         <module name="cloud-mq-message-producer-feign" />
-        <module name="config-mong-extends" />
+        <module name="config-jpa-extends" />
         <module name="business-admin-permission-manager-feign" />
         <module name="provider-order-interface" />
         <module name="business-member-cart" />
@@ -39,10 +42,9 @@
         <module name="config-sentinel" />
         <module name="business-member-profile" />
         <module name="business-admin-permission-manager" />
-        <module name="message-consumer" />
-        <module name="provider-goods-interface" />
-        <module name="provider-es-goods" />
         <module name="message-producer-inteface" />
+        <module name="provider-es-goods" />
+        <module name="message-consumer" />
         <module name="business-admin-goods-manage" />
         <module name="provider-ums-admin" />
       </profile>
@@ -72,8 +74,10 @@
       <module name="business-admin-permission-manager-feign" options="-parameters" />
       <module name="business-member-cart" options="-parameters" />
       <module name="business-member-login-oauth2" options="-parameters" />
+      <module name="business-member-order" options="-parameters" />
       <module name="business-member-profile" options="-parameters" />
       <module name="business-member-registry" options="-parameters" />
+      <module name="business-public-goods-detail" options="-parameters" />
       <module name="business-public-search" options="-parameters" />
       <module name="cloud" options="" />
       <module name="cloud-image-service" options="-parameters" />

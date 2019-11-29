@@ -1,6 +1,7 @@
 package com.akali.provider.user.member.service;
 
 import com.akali.common.dto.member.MemberLoginResponseDTO;
+import com.akali.common.dto.member.MemberProfileDTO;
 import com.akali.common.dto.member.MemberRegDTO;
 import com.akali.common.model.response.DubboResponse;
 
@@ -34,9 +35,16 @@ public interface MemberService {
     DubboResponse<Void> checkExistByMemberAccount(String account);
 
     /**
-     *
+     * 获取会员账号密码 用于登录
      * @param account
      * @return
      */
     DubboResponse<MemberLoginResponseDTO> getMemberByAccount(String account);
+
+    /**
+     * 获取会员详细信息
+     * @param memberId
+     * @return
+     */
+    DubboResponse<MemberProfileDTO> getMemberProfile(Long memberId);
 }

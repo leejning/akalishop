@@ -27,11 +27,6 @@
             <scope>test</scope>
         </dependency>
         <!-- Spring Boot end -->
-        <!-- Spring Security -->
-        <dependency>
-            <groupId>org.springframework.cloud</groupId>
-            <artifactId>spring-cloud-starter-oauth2</artifactId>
-        </dependency>
         <!-- Spring Cloud-->
         <!--fegin-->
         <dependency>
@@ -39,10 +34,10 @@
             <artifactId>spring-cloud-starter-openfeign</artifactId>
         </dependency>
         <!--oauth2-->
-        <!--<dependency>
+        <dependency>
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-oauth2</artifactId>
-        </dependency>-->
+        </dependency>
         <!-- Spring Cloud Alibaba-->
         <dependency>
             <groupId>com.alibaba.cloud</groupId>
@@ -69,7 +64,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.akali.business.cart.BusinessMemberCartApplication</mainClass>
+                    <mainClass>com.akali.business.member.cart.BusinessMemberCartApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>

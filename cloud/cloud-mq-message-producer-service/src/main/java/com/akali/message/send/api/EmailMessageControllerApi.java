@@ -1,7 +1,7 @@
 package com.akali.message.send.api;
 
 import com.akali.common.dto.EmailContextDTO;
-import com.akali.common.model.response.ResponseResult;
+import com.akali.common.model.response.QueryResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -16,5 +16,5 @@ import io.swagger.annotations.ApiOperation;
 public interface EmailMessageControllerApi {
 
     @ApiOperation("发送邮箱消息")
-    public ResponseResult<Void> sendMemberRegistryEmailCode(EmailContextDTO emailContextDTO);
+    public QueryResponseResult<Void> sendMemberRegistryEmailCode(EmailContextDTO emailContextDTO);
 }

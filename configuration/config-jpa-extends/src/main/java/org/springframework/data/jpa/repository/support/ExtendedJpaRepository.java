@@ -19,10 +19,8 @@ import javax.persistence.*;
 import javax.persistence.criteria.*;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.lang.reflect.Method;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.springframework.data.jpa.repository.query.QueryUtils.toOrders;
@@ -37,6 +35,7 @@ import static org.springframework.data.jpa.repository.query.QueryUtils.toOrders;
 @Slf4j
 public class ExtendedJpaRepository<T, ID> extends SimpleJpaRepository<T, ID> implements ExtendedJpaRepositoryApi<T, ID> {
     private EntityManager entityManager;
+
     private JpaEntityInformation<T, ?> entityInformation;
 
     public ExtendedJpaRepository(JpaEntityInformation<T, ?> entityInformation, EntityManager entityManager) {
@@ -57,15 +56,15 @@ public class ExtendedJpaRepository<T, ID> extends SimpleJpaRepository<T, ID> imp
      * @return
      */
     @Override
-    public List<?> findAll(ExtendedSpecification<T> spec, Class<?> resultClass) {
+    public <S> List<S> findAll(ExtendedSpecification<T> spec, Class<S> resultClass) {
         TypedQuery<Tuple> query = getQuery(spec, Sort.unsorted(), resultClass);
-        return applyQueryHints(query, resultClass);
+        return applyQueryHints(query, resultClass, spec);
     }
 
     @Override
-    public List<?> findAll(ExtendedSpecification<T> spec, Sort sort, Class<?> resultClass) {
+    public <S> List<S> findAll(ExtendedSpecification<T> spec, Sort sort, Class<S> resultClass) {
         TypedQuery<Tuple> query = getQuery(spec, sort, resultClass);
-        return applyQueryHints(query, resultClass);
+        return applyQueryHints(query, resultClass, spec);
     }
 
     @Override
@@ -81,7 +80,7 @@ public class ExtendedJpaRepository<T, ID> extends SimpleJpaRepository<T, ID> imp
             query.setFirstResult((int) pageable.getOffset());
             query.setMaxResults(pageable.getPageSize());
         }
-        List<?> resultList = applyQueryHints(query, resultClass);
+        List<?> resultList = applyQueryHints(query, resultClass, (ExtendedSpecification<T>) spec);
         return PageableExecutionUtils.getPage(resultList, pageable,
                 () -> executeCountQuery(getCountQuery(spec, domainClass)));
     }
@@ -119,7 +118,7 @@ public class ExtendedJpaRepository<T, ID> extends SimpleJpaRepository<T, ID> imp
         Root<T> root = query.from(getDomainClass());
 
         SelectorBuilder selectorBuilder = spec.getSelectorBuilder();
-        Assert.notNull(selectorBuilder, "SelectorBuilder选择器不能为空！");
+        Assert.notNull(selectorBuilder, "SelectorBuilder选择器不能为空！可能是resultClass为空导致");
 
         /**
          * 构造select...
@@ -155,43 +154,117 @@ public class ExtendedJpaRepository<T, ID> extends SimpleJpaRepository<T, ID> imp
      * 封装查询结果到某个DTO类
      *
      * @param query
-     * @param resultClass DTO类
+     * @param resultClass
+     * @param spec
+     * @param <S>
      * @return
      */
-    private List<?> applyQueryHints(TypedQuery<Tuple> query, Class<?> resultClass) {
+    private <S> List<S> applyQueryHints(TypedQuery<Tuple> query, Class<S> resultClass, ExtendedSpecification<T> spec) {
         List<Tuple> resultList = query.getResultList();
         if (resultList.isEmpty()) {
             return Collections.emptyList();
         }
         Tuple tuple1 = resultList.get(0);
-        List<? extends Class<?>> collect = tuple1.getElements().stream().map(t -> t.getJavaType()).collect(Collectors.toList());
-        Class[] classes = collect.toArray(new Class[(collect.size())]);
-        Constructor<?> constructor = null;
+        List<? extends Class<?>> filedTypes = tuple1.getElements().stream().map(t -> t.getJavaType()).collect(Collectors.toList());
+        Class[] classes = filedTypes.toArray(new Class[(filedTypes.size())]);
+        Constructor<S> constructor = null;
+        boolean noArgsConstructor = false;
         try {
+            //获取全参构造器
             constructor = resultClass.getConstructor(classes);
+            if (constructor == null) {
+                //采用setter注入
+                noArgsConstructor = true;
+                //拿无参构造器
+                constructor = resultClass.getConstructor();
+            }
         } catch (NoSuchMethodException e) {
-            log.error(resultClass.getName() + "——DTO类没有对应的构造方法,参数列表为：看下面");
-            e.printStackTrace();
-        }
-        List<Object> list = Lists.newArrayList();
-        for (Tuple tuple : resultList) {
-            Object[] objects = new Object[collect.size()];
-            for (int i = 0; i < collect.size(); i++) {
-                objects[i] = tuple.get(i);
-            }
-            Object o = null;
+            //采用setter注入
+            noArgsConstructor = true;
             try {
-                o = constructor.newInstance(objects);
-            } catch (InstantiationException | InvocationTargetException e) {
-                log.error("创建DTO类对象失败");
-                e.printStackTrace();
-            } catch (IllegalAccessException e) {
-                log.error(resultClass.getName() + "——DTO类构造方法参数与结果集的字段不一致！");
-                e.printStackTrace();
+                //拿无参构造器
+                constructor = resultClass.getConstructor();
+            } catch (NoSuchMethodException ex) {
+                ex.printStackTrace();
             }
-            list.add(o);
+        }
+
+        //setter注入先拿到所有setter方法
+        List<Method> methods = null;
+        if (noArgsConstructor) {
+            SelectorBuilder selectorBuilder = spec.getSelectorBuilder();
+            List<String> selectorList = selectorBuilder.getSelectorList();
+            methods = new ArrayList<Method>(selectorList.size());
+            int i = 0;
+            for (String fieldName : selectorList) {
+                StringBuilder sb = new StringBuilder(fieldName);
+                String s = sb.substring(0, 1).toUpperCase();
+                sb.deleteCharAt(0).insert(0, s).insert(0, "set");
+                String methodName = sb.toString();
+
+                Class<?> filedType = filedTypes.get(i);
+                try {
+                    Method method = resultClass.getMethod(methodName, filedType);
+                    methods.add(method);
+                } catch (NoSuchMethodException e) {
+                    log.error(">>>>>>找不到{} 名为{} 的setter方法",fieldName,methodName);
+                    e.printStackTrace();
+                }
+
+                i++;
+            }
+
+        }
+        List<S> list = Lists.newArrayList();
+        for (Tuple tuple : resultList) {
+            S item = null;
+            if (noArgsConstructor) {
+                item = settingInject(tuple, methods, constructor);
+            } else {
+                item = constructorInject(tuple, constructor, filedTypes);
+            }
+            list.add(item);
         }
         return list;
+    }
+
+    private <S> S settingInject(Tuple tuple, List<Method> methods, Constructor<S> constructor) {
+        S object = null;
+
+        try {
+            object = constructor.newInstance();
+        } catch (InstantiationException | IllegalAccessException | InvocationTargetException e) {
+            e.printStackTrace();
+        }
+
+
+        int i = 0;
+        for (Method method : methods) {
+            try {
+                method.invoke(object,tuple.get(i));
+            } catch (IllegalAccessException | InvocationTargetException e) {
+                e.printStackTrace();
+            }
+            i++;
+        }
+
+        return object;
+    }
+
+
+    private <S> S constructorInject(Tuple tuple, Constructor<S> constructor, List<? extends Class<?>> collect) {
+        Object[] objects = new Object[collect.size()];
+        for (int i = 0; i < collect.size(); i++) {
+            objects[i] = tuple.get(i);
+        }
+        S item = null;
+        try {
+            item = constructor.newInstance(objects);
+        } catch (InstantiationException | InvocationTargetException | IllegalAccessException e) {
+            log.error("反射创建 {} 实例失败", constructor.getName());
+            e.printStackTrace();
+        }
+        return item;
     }
 
 

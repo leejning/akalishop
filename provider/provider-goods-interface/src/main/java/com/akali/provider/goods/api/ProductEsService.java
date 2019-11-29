@@ -1,6 +1,6 @@
 package com.akali.provider.goods.api;
 
-import com.akali.common.dto.goods.SpuEsDTO;
+import com.akali.common.dto.goods.spu.SpuEsDTO;
 import com.akali.common.model.response.DubboResponse;
 
 /**

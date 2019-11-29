@@ -1,6 +1,6 @@
 package com.akali.provider.goods.dao;
 
-import com.akali.common.dto.goods.SpuDetaiModifyDTO;
+import com.akali.common.dto.goods.spu.SpuDetaiModifyDTO;
 import com.akali.provider.goods.bean.PmsSpuDetail;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;

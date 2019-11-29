@@ -4,7 +4,10 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 /**
  * @ClassName PmsSkuStock
@@ -21,13 +24,16 @@ import javax.persistence.*;
 public class PmsSkuStock {
     @Id
     private Long skuId;
+    private Long spuId;
     /**
      * 总库存
      */
     @Column(length=9)
     private Integer stock;
+    /**
+     * 价格
+     */
+    @Column(length=15)
+    private Long price;
 
-    public static PmsSkuStock initStock(Long skuId){
-        return new PmsSkuStock(skuId,0);
-    }
 }

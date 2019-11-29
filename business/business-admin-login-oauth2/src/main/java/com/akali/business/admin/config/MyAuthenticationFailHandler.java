@@ -1,7 +1,7 @@
 package com.akali.business.admin.config;
 
 import com.akali.common.code.AdminCode;
-import com.akali.common.model.response.ResponseResult;
+import com.akali.common.model.response.QueryResponseResult;
 import com.alibaba.fastjson.JSON;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +34,6 @@ public class MyAuthenticationFailHandler extends SimpleUrlAuthenticationFailureH
         response.setStatus(500);
         response.setContentType("application/json;charset=UTF-8");
         //将 登录失败 信息打包成json格式返回
-        response.getWriter().write(JSON.toJSONString(ResponseResult.FAIL(AdminCode.ADMIN_LOGIN_FAIL)));
+        response.getWriter().write(JSON.toJSONString(QueryResponseResult.FAIL(AdminCode.ADMIN_LOGIN_FAIL)));
     }
 }

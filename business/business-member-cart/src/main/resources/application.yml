@@ -2,4 +2,4 @@ swagger2:
   doc:
     title: 会员购物车业务文档
     desc: 会员购物车业务Api
-    basePackage: com.akali.business.cart
+    basePackage: com.akali.business.member.cart.web

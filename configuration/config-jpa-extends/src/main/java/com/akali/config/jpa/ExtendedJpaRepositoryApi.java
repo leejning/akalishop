@@ -28,9 +28,9 @@ public interface ExtendedJpaRepositoryApi<T,ID> extends JpaRepository<T,ID>,JpaS
      * 下面几个是自动把查询结果封装到指定的包装类 resultClass
      *
      */
-    public List<?> findAll(ExtendedSpecification<T> spec, Class<?> resultClass);
+    public <S> List<S> findAll(ExtendedSpecification<T> spec, Class<S> resultClass);
 
-    public List<?> findAll(ExtendedSpecification<T> spec, Sort sort, Class<?> resultClass);
+    public <S> List<S> findAll(ExtendedSpecification<T> spec, Sort sort, Class<S> resultClass);
 
     public Page<?> findAll(ExtendedSpecification<T> spec, Pageable pageable, Class<?> resultClass);
 }

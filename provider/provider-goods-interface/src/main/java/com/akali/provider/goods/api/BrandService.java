@@ -1,6 +1,6 @@
 package com.akali.provider.goods.api;
 
-import com.akali.common.dto.goods.BrandCreateDTO;
+import com.akali.common.dto.goods.base.BrandCreateDTO;
 import com.akali.common.model.response.DubboResponse;
 
 /**

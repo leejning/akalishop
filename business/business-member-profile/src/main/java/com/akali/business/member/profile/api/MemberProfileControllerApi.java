@@ -17,6 +17,6 @@ import javax.servlet.http.HttpServletRequest;
 @Api(value = "会员信息服务接口")
 public interface MemberProfileControllerApi {
 
-    @ApiOperation("获取会员信息")
+    @ApiOperation("查询会员用户详细信息")
     public ResponseResult<MemberProfileDTO> getMemberProfile(HttpServletRequest request);
 }

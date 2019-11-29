@@ -3,6 +3,7 @@ package com.akali.provider.user.member.service;
 import com.akali.common.code.CommonCode;
 import com.akali.common.code.MemberCode;
 import com.akali.common.dto.member.MemberLoginResponseDTO;
+import com.akali.common.dto.member.MemberProfileDTO;
 import com.akali.common.dto.member.MemberRegDTO;
 import com.akali.common.model.response.DubboResponse;
 import com.akali.common.utils.IdUtil;
@@ -79,7 +80,7 @@ public class MemberServiceImpl implements MemberService{
 
     /**
      * 根据账号查询会员登录信息
-     * @param account
+     * @param account+
      * @return
      */
     @Override
@@ -94,6 +95,23 @@ public class MemberServiceImpl implements MemberService{
         }
         log.info(">>>>>会员账号：{}，获取到会员的账号密码信息，返回结果。>>>>",account);
         MemberLoginResponseDTO data = new MemberLoginResponseDTO();
+        BeanUtils.copyProperties(opt.get(),data);
+        return DubboResponse.SUCCESS(data);
+    }
+
+    /**
+     * 获取会员详细信息
+     *
+     * @param memberId
+     * @return
+     */
+    @Override
+    public DubboResponse<MemberProfileDTO> getMemberProfile(Long memberId) {
+        Optional<UmsMember> opt = memberDao.findById(memberId);
+        if(!opt.isPresent()){
+            DubboResponse.FAIL(MemberCode.MEMBER_ACCOUNT_NOT_EXIST);
+        }
+        MemberProfileDTO data = new MemberProfileDTO();
         BeanUtils.copyProperties(opt.get(),data);
         return DubboResponse.SUCCESS(data);
     }

@@ -2,4 +2,4 @@ swagger2:
   doc:
     title: 会员登录服务文档
     desc: 会员登录服务Api
-    basePackage: com.akali.business.member
+    basePackage: com.akali.business.member.web

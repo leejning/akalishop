@@ -1,7 +1,7 @@
 package com.akali.common.data_help;
 
 
-import com.akali.common.dto.QueryPageBase;
+import com.akali.common.dto.query.QueryPageBase;
 import com.akali.common.model.response.QueryResult;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.BeanUtils;

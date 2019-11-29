@@ -1,6 +1,6 @@
 package com.akali.provider.cart.query_helper;
 
-import com.akali.common.dto.QueryPageBase;
+import com.akali.common.dto.query.QueryPageBase;
 import lombok.Data;
 
 /**

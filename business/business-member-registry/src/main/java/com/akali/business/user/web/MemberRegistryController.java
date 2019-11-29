@@ -8,6 +8,7 @@ import com.akali.common.code.RegistryCode;
 import com.akali.common.dto.EmailContextDTO;
 import com.akali.common.dto.member.MemberRegDTO;
 import com.akali.common.model.response.DubboResponse;
+import com.akali.common.model.response.QueryResponseResult;
 import com.akali.common.model.response.ResponseResult;
 import com.akali.common.utils.ExceptionCast;
 import com.akali.provider.user.member.service.MemberService;
@@ -136,7 +137,7 @@ public class MemberRegistryController implements MemberRegistryApi {
     @Override
     public ResponseResult<Boolean> verifyImageCode(ImageCodeDTO imageCodeDTO) {
         if (imageCodeFeign.imgvrifyControllerDefaultKaptcha(imageCodeDTO)) {
-            return ResponseResult.SUCCESS(Boolean.FALSE);
+            return QueryResponseResult.SUCCESS(Boolean.FALSE);
         }
         return ResponseResult.SUCCESS(Boolean.TRUE);
     }

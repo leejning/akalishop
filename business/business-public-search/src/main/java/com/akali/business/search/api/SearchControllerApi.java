@@ -1,6 +1,6 @@
 package com.akali.business.search.api;
 
-import com.akali.common.model.response.ResponseResult;
+import com.akali.common.model.response.QueryResponseResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
@@ -14,5 +14,5 @@ import io.swagger.annotations.ApiOperation;
 @Api(value = "搜索服务Api",tags = "搜索服务Api")
 public interface SearchControllerApi {
     @ApiOperation("按id搜索")
-    public ResponseResult<ProductDTO> queryProductById(Long SpuId);
+    public QueryResponseResult<ProductDTO> queryProductById(Long SpuId);
 }

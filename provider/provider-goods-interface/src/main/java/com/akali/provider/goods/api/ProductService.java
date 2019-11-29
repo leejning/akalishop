@@ -1,6 +1,10 @@
 package com.akali.provider.goods.api;
 
-import com.akali.common.dto.goods.*;
+import com.akali.common.dto.goods.base.AttrValueDTO;
+import com.akali.common.dto.goods.sku.SkuCreateDTO;
+import com.akali.common.dto.goods.sku.SkuDTO;
+import com.akali.common.dto.goods.spu.*;
+import com.akali.common.dto.query.SpuQueryDTO;
 import com.akali.common.model.response.DubboResponse;
 import com.akali.common.model.response.QueryResult;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -74,4 +78,17 @@ public interface ProductService {
      * @return
      */
     DubboResponse<QueryResult<SkuDTO>> queryProductSkus(Long spuId);
+    /**
+     * 获取某个商品的销售页信息
+     * @param spuId
+     * @return
+     */
+    DubboResponse<ProductSalePageInfoVO> getProductSalePageInfo(Long spuId);
+
+    /**
+     * 
+     * @param spuQueryDTO
+     * @return
+     */
+    DubboResponse<QueryResult<SpuPageDTO>> queryProductPage(SpuQueryDTO spuQueryDTO);
 }

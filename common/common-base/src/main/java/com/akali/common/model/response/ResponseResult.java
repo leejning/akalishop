@@ -71,7 +71,7 @@ public class ResponseResult<T> implements Response {
     public static <T> ResponseResult<T> FAIL(ResultCode resultCode){
         return new ResponseResult<>(resultCode);
     }
-    public static <T> ResponseResult<T> FAIL(ResultCode resultCode,T data){
+    public static <T> ResponseResult<T> FAIL(ResultCode resultCode, T data){
         return new ResponseResult<>(resultCode,data);
     }
     public static ResponseResult FAIL(int code, String defaultMessage) {

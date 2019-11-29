@@ -1,9 +1,9 @@
 package com.akali.provider.goods.service;
 
 import com.akali.common.code.ProductCode;
-import com.akali.common.dto.goods.SkuEsDTO;
-import com.akali.common.dto.goods.SpuDetailDTO;
-import com.akali.common.dto.goods.SpuEsDTO;
+import com.akali.common.dto.goods.sku.SkuEsDTO;
+import com.akali.common.dto.goods.spu.SpuDetailDTO;
+import com.akali.common.dto.goods.spu.SpuEsDTO;
 import com.akali.common.model.response.DubboResponse;
 import com.akali.provider.goods.api.ProductEsService;
 import com.akali.provider.goods.bean.PmsSpu;
@@ -11,6 +11,7 @@ import com.akali.provider.goods.bean.PmsSpuDetail;
 import com.akali.provider.goods.dao.SkuDao;
 import com.akali.provider.goods.dao.SpuDao;
 import com.akali.provider.goods.dao.SpuDetailDao;
+import com.akali.provider.goods.queryhelper.SkuEntityQueryHelper;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -53,7 +54,9 @@ public class ProductEsServiceImpl implements ProductEsService {
         SpuDetailDTO spuDetailDTO = new SpuDetailDTO(spuDetail);
         spuEsDTO.setSpuDetail(spuDetailDTO);
 
-        List<SkuEsDTO> skuEsDTOS = skuDao.findBySpuIdEs(spu.getId());
+        SkuEntityQueryHelper queryHelper = SkuEntityQueryHelper.create(SpuEsDTO.class);
+        List<SkuEsDTO> skuEsDTOS = skuDao.findAll(SkuEntityQueryHelper.getWhere(queryHelper), SkuEsDTO.class);
+
         spuEsDTO.setSkus(skuEsDTOS);
 
         return DubboResponse.SUCCESS(spuEsDTO);

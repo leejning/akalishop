@@ -21,6 +21,8 @@
         <module>business-admin-permission-manager</module>
         <module>business-admin-permission-manager-feign</module>
         <module>business-member-login-oauth2</module>
+        <module>business-public-goods-detail</module>
+        <module>business-member-order</module>
     </modules>
 
     <dependencies>

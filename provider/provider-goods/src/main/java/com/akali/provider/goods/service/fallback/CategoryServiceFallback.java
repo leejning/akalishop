@@ -1,7 +1,7 @@
 package com.akali.provider.goods.service.fallback;
 
 import com.akali.common.code.CommonCode;
-import com.akali.common.dto.goods.CategoryDTO;
+import com.akali.common.dto.goods.base.CategoryDTO;
 import com.akali.common.model.response.DubboResponse;
 import com.akali.common.model.response.QueryResult;
 import lombok.extern.slf4j.Slf4j;

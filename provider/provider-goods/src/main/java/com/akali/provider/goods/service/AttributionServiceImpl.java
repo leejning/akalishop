@@ -1,7 +1,7 @@
 package com.akali.provider.goods.service;
 
 import com.akali.common.code.CommonCode;
-import com.akali.common.dto.goods.*;
+import com.akali.common.dto.goods.base.*;
 import com.akali.common.model.response.DubboResponse;
 import com.akali.provider.goods.api.AttributionService;
 import com.akali.provider.goods.bean.PmsBaseAttrGroup;
@@ -12,6 +12,7 @@ import com.akali.provider.goods.dao.BaseAttrOptionDao;
 import com.akali.provider.goods.dao.BaseAttrValueDao;
 import com.akali.provider.goods.dao.BaseAttributionDao;
 import com.akali.provider.goods.queryhelper.AttrOptionEntityQueryHelper;
+import com.akali.provider.goods.queryhelper.AttrValueEntityQueryHelper;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import org.apache.dubbo.config.annotation.Service;
@@ -152,7 +153,11 @@ public class AttributionServiceImpl implements AttributionService {
      */
     @Override
     public DubboResponse<List<AttrValueDTO>> queryProductAttrValueBySpuId(Long spuId) {
-        List<AttrValueDTO> data = baseAttrValueDao.findBySpuId(spuId);
+        AttrValueEntityQueryHelper queryHelper = AttrValueEntityQueryHelper.create(AttrValueDTO.class);
+        queryHelper.setSpuId(spuId);
+        //查询数据
+        List<AttrValueDTO> data = baseAttrValueDao
+                .findAll(AttrValueEntityQueryHelper.getWhere(queryHelper), AttrValueDTO.class);
         return DubboResponse.SUCCESS(data);
     }
 

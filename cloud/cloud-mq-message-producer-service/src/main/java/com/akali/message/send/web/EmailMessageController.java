@@ -1,7 +1,7 @@
 package com.akali.message.send.web;
 
 import com.akali.common.dto.EmailContextDTO;
-import com.akali.common.model.response.ResponseResult;
+import com.akali.common.model.response.QueryResponseResult;
 import com.akali.message.send.api.EmailMessageControllerApi;
 import com.akali.message.send.exchange.EmailExchange;
 import org.springframework.amqp.core.AmqpTemplate;
@@ -27,8 +27,8 @@ public class EmailMessageController implements EmailMessageControllerApi {
 
     @PostMapping("member/registry")
     @Override
-    public ResponseResult<Void> sendMemberRegistryEmailCode(@RequestBody EmailContextDTO emailContextDTO) {
+    public QueryResponseResult<Void> sendMemberRegistryEmailCode(@RequestBody EmailContextDTO emailContextDTO) {
         amqpTemplate.convertAndSend(EmailExchange.EXCHANGE_MEAIL,EmailExchange.routingKey,emailContextDTO);
-        return ResponseResult.SUCCESS();
+        return QueryResponseResult.SUCCESS();
     }
 }

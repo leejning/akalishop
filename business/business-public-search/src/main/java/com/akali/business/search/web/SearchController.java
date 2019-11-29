@@ -2,7 +2,7 @@ package com.akali.business.search.web;
 
 import com.akali.business.search.api.SearchControllerApi;
 import com.akali.common.model.response.DubboResponse;
-import com.akali.common.model.response.ResponseResult;
+import com.akali.common.model.response.QueryResponseResult;
 import com.akali.common.utils.ExceptionCast;
 import com.akali.provider.es.service.SearchService;
 import org.apache.dubbo.config.annotation.Reference;
@@ -27,11 +27,11 @@ public class SearchController implements SearchControllerApi {
 
     @GetMapping("/{SpuId}")
     @Override
-    public ResponseResult<ProductDTO> queryProductById(@PathVariable Long SpuId) {
+    public QueryResponseResult<ProductDTO> queryProductById(@PathVariable Long SpuId) {
         DubboResponse<ProductDTO> response = searchService.queryProductById(SpuId);
         if (!response.isSuccess()){
             ExceptionCast.cast(response.getResultCode());
         }
-        return ResponseResult.SUCCESS(response.getData());
+        return QueryResponseResult.SUCCESS(response.getData());
     }
 }

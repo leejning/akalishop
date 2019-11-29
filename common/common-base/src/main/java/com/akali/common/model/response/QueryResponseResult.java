@@ -17,6 +17,11 @@ public class QueryResponseResult<T> extends ResponseResult<T> implements Seriali
         super(resultCode);
         this.queryResult = queryResult;
     }
+    @Override
+    public QueryResponseResult message(String message){
+        this.message = message;
+        return this;
+    }
 
     public static <T> QueryResponseResult<T> SUCCESS(QueryResult<T> queryResult) {
         return new QueryResponseResult<>(CommonCode.SUCCESS, queryResult);

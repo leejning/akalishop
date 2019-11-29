@@ -60,6 +60,11 @@ public class PmsSpu {
     @Column(columnDefinition="tinyint",length=2)
     private Boolean valid;
     /**
+     * 在售状态
+     */
+    @Column(columnDefinition="tinyint",length=2)
+    private Boolean del;
+    /**
      * 创建时间
      */
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
@@ -69,4 +74,6 @@ public class PmsSpu {
      */
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
     private Date lastUpdateTime;
+    @Column(length=64)
+    private String lastModifyAdmin;
 }
