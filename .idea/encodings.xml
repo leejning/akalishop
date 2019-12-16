@@ -7,6 +7,7 @@
     <file url="file://$PROJECT_DIR$/business/business-admin-login-oauth2" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/business/business-admin-permission-manager" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/business/business-admin-permission-manager-feign" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/business/business-admin-profile" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/business/business-member-cart" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/business/business-member-login-oauth2" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/business/business-member-order" charset="UTF-8" />
@@ -35,6 +36,8 @@
     <file url="file://$PROJECT_DIR$/dependencies" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dependencies/dep-db-mysql" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/dependencies/dep-rpc-dubbo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gateway" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/gateway/gateway-admin" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/message" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/message/message-consumer" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/message/message-producer" charset="UTF-8" />
@@ -48,9 +51,12 @@
     <file url="file://$PROJECT_DIR$/provider/provider-goods-interface" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/provider/provider-order" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/provider/provider-order-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/provider/provider-transfer" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/provider/provider-ums-admin" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/provider/provider-ums-admin-interface" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/provider/provider-ums-member" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/provider/provider-ums-member-interface" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/provider/provider-validate-post-redo" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/provider/provider-validate-post-redo-interface" charset="UTF-8" />
   </component>
 </project>

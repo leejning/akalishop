@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/akalishop.iml" filepath="$PROJECT_DIR$/akalishop.iml" />
+      <module fileurl="file://$PROJECT_DIR$/business/business.iml" filepath="$PROJECT_DIR$/business/business.iml" />
+      <module fileurl="file://$PROJECT_DIR$/business/business-admin-goods-manage/business-admin-goods-manage.iml" filepath="$PROJECT_DIR$/business/business-admin-goods-manage/business-admin-goods-manage.iml" />
+      <module fileurl="file://$PROJECT_DIR$/business/business-admin-login-oauth2/business-admin-login-oauth2.iml" filepath="$PROJECT_DIR$/business/business-admin-login-oauth2/business-admin-login-oauth2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/business/business-admin-permission-manager/business-admin-permission-manager.iml" filepath="$PROJECT_DIR$/business/business-admin-permission-manager/business-admin-permission-manager.iml" />
+      <module fileurl="file://$PROJECT_DIR$/business/business-admin-permission-manager-feign/business-admin-permission-manager-feign.iml" filepath="$PROJECT_DIR$/business/business-admin-permission-manager-feign/business-admin-permission-manager-feign.iml" />
+      <module fileurl="file://$PROJECT_DIR$/business/business-admin-profile/business-admin-profile.iml" filepath="$PROJECT_DIR$/business/business-admin-profile/business-admin-profile.iml" />
+      <module fileurl="file://$PROJECT_DIR$/business/business-member-cart/business-member-cart.iml" filepath="$PROJECT_DIR$/business/business-member-cart/business-member-cart.iml" />
+      <module fileurl="file://$PROJECT_DIR$/business/business-member-login-oauth2/business-member-login-oauth2.iml" filepath="$PROJECT_DIR$/business/business-member-login-oauth2/business-member-login-oauth2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/business/business-member-order/business-member-order.iml" filepath="$PROJECT_DIR$/business/business-member-order/business-member-order.iml" />
+      <module fileurl="file://$PROJECT_DIR$/business/business-member-profile/business-member-profile.iml" filepath="$PROJECT_DIR$/business/business-member-profile/business-member-profile.iml" />
+      <module fileurl="file://$PROJECT_DIR$/business/business-member-registry/business-member-registry.iml" filepath="$PROJECT_DIR$/business/business-member-registry/business-member-registry.iml" />
+      <module fileurl="file://$PROJECT_DIR$/business/business-public-goods-detail/business-public-goods-detail.iml" filepath="$PROJECT_DIR$/business/business-public-goods-detail/business-public-goods-detail.iml" />
+      <module fileurl="file://$PROJECT_DIR$/business/business-public-search/business-public-search.iml" filepath="$PROJECT_DIR$/business/business-public-search/business-public-search.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud/cloud.iml" filepath="$PROJECT_DIR$/cloud/cloud.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud/cloud-image-service/cloud-image-service.iml" filepath="$PROJECT_DIR$/cloud/cloud-image-service/cloud-image-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud/cloud-image-verify-code-feign/cloud-image-verify-code-feign.iml" filepath="$PROJECT_DIR$/cloud/cloud-image-verify-code-feign/cloud-image-verify-code-feign.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud/cloud-image-verify-code-service/cloud-image-verify-code-service.iml" filepath="$PROJECT_DIR$/cloud/cloud-image-verify-code-service/cloud-image-verify-code-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud/cloud-mq-message-producer-feign/cloud-mq-message-producer-feign.iml" filepath="$PROJECT_DIR$/cloud/cloud-mq-message-producer-feign/cloud-mq-message-producer-feign.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud/cloud-mq-message-producer-service/cloud-mq-message-producer-service.iml" filepath="$PROJECT_DIR$/cloud/cloud-mq-message-producer-service/cloud-mq-message-producer-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/cloud/cloud-send-email-service/cloud-send-email-service.iml" filepath="$PROJECT_DIR$/cloud/cloud-send-email-service/cloud-send-email-service.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common.iml" filepath="$PROJECT_DIR$/common/common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common-apps/common-apps.iml" filepath="$PROJECT_DIR$/common/common-apps/common-apps.iml" />
+      <module fileurl="file://$PROJECT_DIR$/common/common-base/common-base.iml" filepath="$PROJECT_DIR$/common/common-base/common-base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/configuration/config-admin-oauth2/config-admin-oauth2.iml" filepath="$PROJECT_DIR$/configuration/config-admin-oauth2/config-admin-oauth2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/configuration/config-jpa-extends/config-jpa-extends.iml" filepath="$PROJECT_DIR$/configuration/config-jpa-extends/config-jpa-extends.iml" />
+      <module fileurl="file://$PROJECT_DIR$/configuration/config-member-oauth2/config-member-oauth2.iml" filepath="$PROJECT_DIR$/configuration/config-member-oauth2/config-member-oauth2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/configuration/config-mong-extends/config-mong-extends.iml" filepath="$PROJECT_DIR$/configuration/config-mong-extends/config-mong-extends.iml" />
+      <module fileurl="file://$PROJECT_DIR$/configuration/config-sentinel/config-sentinel.iml" filepath="$PROJECT_DIR$/configuration/config-sentinel/config-sentinel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/configuration/config-web-exception-handle/config-web-exception-handle.iml" filepath="$PROJECT_DIR$/configuration/config-web-exception-handle/config-web-exception-handle.iml" />
+      <module fileurl="file://$PROJECT_DIR$/configuration/config-web-swagger2/config-web-swagger2.iml" filepath="$PROJECT_DIR$/configuration/config-web-swagger2/config-web-swagger2.iml" />
+      <module fileurl="file://$PROJECT_DIR$/configuration/configuration.iml" filepath="$PROJECT_DIR$/configuration/configuration.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dependencies/dep-db-mysql/dep-db-mysql.iml" filepath="$PROJECT_DIR$/dependencies/dep-db-mysql/dep-db-mysql.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dependencies/dep-rpc-dubbo/dep-rpc-dubbo.iml" filepath="$PROJECT_DIR$/dependencies/dep-rpc-dubbo/dep-rpc-dubbo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/dependencies/dependencies.iml" filepath="$PROJECT_DIR$/dependencies/dependencies.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gateway/gateway.iml" filepath="$PROJECT_DIR$/gateway/gateway.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gateway/gateway-admin/gateway-admin.iml" filepath="$PROJECT_DIR$/gateway/gateway-admin/gateway-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/message/message.iml" filepath="$PROJECT_DIR$/message/message.iml" />
+      <module fileurl="file://$PROJECT_DIR$/message/message-consumer/message-consumer.iml" filepath="$PROJECT_DIR$/message/message-consumer/message-consumer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/message/message-producer/message-producer.iml" filepath="$PROJECT_DIR$/message/message-producer/message-producer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/message/message-producer-inteface/message-producer-inteface.iml" filepath="$PROJECT_DIR$/message/message-producer-inteface/message-producer-inteface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/provider/provider.iml" filepath="$PROJECT_DIR$/provider/provider.iml" />
+      <module fileurl="file://$PROJECT_DIR$/provider/provider-cart/provider-cart.iml" filepath="$PROJECT_DIR$/provider/provider-cart/provider-cart.iml" />
+      <module fileurl="file://$PROJECT_DIR$/provider/provider-cart-interface/provider-cart-interface.iml" filepath="$PROJECT_DIR$/provider/provider-cart-interface/provider-cart-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/provider/provider-es-goods/provider-es-goods.iml" filepath="$PROJECT_DIR$/provider/provider-es-goods/provider-es-goods.iml" />
+      <module fileurl="file://$PROJECT_DIR$/provider/provider-es-goods-interface/provider-es-goods-interface.iml" filepath="$PROJECT_DIR$/provider/provider-es-goods-interface/provider-es-goods-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/provider/provider-goods/provider-goods.iml" filepath="$PROJECT_DIR$/provider/provider-goods/provider-goods.iml" />
+      <module fileurl="file://$PROJECT_DIR$/provider/provider-goods-interface/provider-goods-interface.iml" filepath="$PROJECT_DIR$/provider/provider-goods-interface/provider-goods-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/provider/provider-order/provider-order.iml" filepath="$PROJECT_DIR$/provider/provider-order/provider-order.iml" />
+      <module fileurl="file://$PROJECT_DIR$/provider/provider-order-interface/provider-order-interface.iml" filepath="$PROJECT_DIR$/provider/provider-order-interface/provider-order-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/provider/provider-transfer/provider-transfer.iml" filepath="$PROJECT_DIR$/provider/provider-transfer/provider-transfer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/provider/provider-ums-admin/provider-ums-admin.iml" filepath="$PROJECT_DIR$/provider/provider-ums-admin/provider-ums-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/provider/provider-ums-admin-interface/provider-ums-admin-interface.iml" filepath="$PROJECT_DIR$/provider/provider-ums-admin-interface/provider-ums-admin-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/provider/provider-ums-member/provider-ums-member.iml" filepath="$PROJECT_DIR$/provider/provider-ums-member/provider-ums-member.iml" />
+      <module fileurl="file://$PROJECT_DIR$/provider/provider-ums-member-interface/provider-ums-member-interface.iml" filepath="$PROJECT_DIR$/provider/provider-ums-member-interface/provider-ums-member-interface.iml" />
+      <module fileurl="file://$PROJECT_DIR$/provider/provider-validate-post-redo/provider-validate-post-redo.iml" filepath="$PROJECT_DIR$/provider/provider-validate-post-redo/provider-validate-post-redo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/provider/provider-validate-post-redo-interface/provider-validate-post-redo-interface.iml" filepath="$PROJECT_DIR$/provider/provider-validate-post-redo-interface/provider-validate-post-redo-interface.iml" />
+    </modules>
+  </component>
+</project>

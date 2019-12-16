@@ -1,15 +1,15 @@
 package com.akali.business.search.web;
 
 import com.akali.business.search.api.SearchControllerApi;
+import com.akali.common.dto.search.ProductVO;
+import com.akali.common.dto.search.SearchDTO;
+import com.akali.common.dto.search.SearchQueryResult;
 import com.akali.common.model.response.DubboResponse;
-import com.akali.common.model.response.QueryResponseResult;
+import com.akali.common.model.response.ResponseResult;
 import com.akali.common.utils.ExceptionCast;
 import com.akali.provider.es.service.SearchService;
 import org.apache.dubbo.config.annotation.Reference;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @ClassName SearchController
@@ -25,13 +25,28 @@ public class SearchController implements SearchControllerApi {
     private SearchService searchService;
 
 
-    @GetMapping("/{SpuId}")
+    @GetMapping("/{spuId}")
     @Override
-    public QueryResponseResult<ProductDTO> queryProductById(@PathVariable Long SpuId) {
-        DubboResponse<ProductDTO> response = searchService.queryProductById(SpuId);
+    public ResponseResult<ProductVO> queryProductById(@PathVariable Long spuId) {
+        DubboResponse<ProductVO> response = searchService.queryProductById(spuId);
         if (!response.isSuccess()){
             ExceptionCast.cast(response.getResultCode());
         }
-        return QueryResponseResult.SUCCESS(response.getData());
+        return ResponseResult.SUCCESS(response.getData());
+    }
+
+    /**
+     * 页面商品搜索
+     * @param searchDTO
+     * @return
+     */
+    @PostMapping("page")
+    @Override
+    public ResponseResult<SearchQueryResult> searchProduct(@RequestBody SearchDTO searchDTO) {
+        DubboResponse<SearchQueryResult> response = searchService.searchProduct(searchDTO);
+        if (!response.isSuccess()){
+            ExceptionCast.cast(response.getResultCode());
+        }
+        return ResponseResult.SUCCESS(response.getData()).message("搜索商品成功");
     }
 }

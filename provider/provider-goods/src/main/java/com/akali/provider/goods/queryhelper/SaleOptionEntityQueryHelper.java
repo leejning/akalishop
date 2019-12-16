@@ -21,6 +21,7 @@ import java.util.List;
  **/
 @Data
 public class SaleOptionEntityQueryHelper extends BaseEntityQueryHelper {
+    private String name;
     private Long cateId;
 
     public static ExtendedSpecification<PmsSaleOption> getWhere(SaleOptionEntityQueryHelper queryHelper) {
@@ -30,9 +31,9 @@ public class SaleOptionEntityQueryHelper extends BaseEntityQueryHelper {
             public Predicate toPredicate(Root<PmsSaleOption> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
                 List<Predicate> predicates = Lists.newArrayList();
 
-                if (queryHelper.getCateId() != null) {
-                    Predicate predicate = cb.equal(root.get("cateId")
-                            .as(Long.class), queryHelper.getCateId());
+                if (queryHelper.getName() != null) {
+                    Predicate predicate = cb.like(root.get("name")
+                            .as(String.class), "%"+queryHelper.getName()+"%");
                     predicates.add(predicate);
                 }
                 return cb.and(predicates.toArray(new Predicate[predicates.size()]));

@@ -1,8 +1,13 @@
 package com.akali.provider.goods.bean;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
-import javax.persistence.*;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
+import java.util.Date;
 
 /**
  * @ClassName PmsSpuDetail
@@ -17,6 +22,23 @@ import javax.persistence.*;
 public class PmsSpuDetail {
     @Id
     private Long spuId;
+    /**
+     * 主标题
+     */
+    @Column(length=256)
+    private String title;
+    /**
+     * 促销信息
+     */
+    @Column(length=256)
+    private String subTitle;
+    /**
+     * 最后修改时间
+     */
+    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
+    private Date lastUpdateTime;
+    @Column(length=64)
+    private String lastModifyAdmin;
     /**
      * 商品介绍
      */
@@ -47,6 +69,6 @@ public class PmsSpuDetail {
     /**
      * 售后服务
      */
-    @Column(length=1000)
+    @Column(length=3000)
     private String afterService;
 }

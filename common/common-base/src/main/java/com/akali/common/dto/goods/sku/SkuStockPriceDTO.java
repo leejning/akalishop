@@ -17,10 +17,6 @@ import lombok.NoArgsConstructor;
 public class SkuStockPriceDTO {
     private Long skuId;
     /**
-     * 价格
-     */
-    private Long price;
-    /**
      * 总库存
      */
     private Integer stock;

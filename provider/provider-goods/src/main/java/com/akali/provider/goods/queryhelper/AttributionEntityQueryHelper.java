@@ -2,15 +2,17 @@ package com.akali.provider.goods.queryhelper;
 
 import com.akali.config.jpa.BaseEntityQueryHelper;
 import com.akali.config.jpa.ExtendedSpecification;
-import com.google.common.collect.Maps;
+import com.akali.config.jpa.ExtendedSpecificationAdapter;
+import com.google.common.collect.Lists;
 import lombok.Data;
-import org.springframework.util.Assert;
 
-import javax.persistence.criteria.*;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
-import java.util.Map;
 
 /**
  * @ClassName AttributionEntityQueryHelper
@@ -23,54 +25,65 @@ import java.util.Map;
 public class AttributionEntityQueryHelper extends BaseEntityQueryHelper {
 
     private Boolean hasOption;
+    private Long cateId;
+    private Boolean generic;
+    private Long groupId;
+    private Boolean searching;
 
     public static<PmsBaseAttrition> ExtendedSpecification<PmsBaseAttrition> getWhere(AttributionEntityQueryHelper queryHelper){
-        return new ExtendedSpecification<PmsBaseAttrition>() {
-            Map<String,ParameterExpression<Collection<?>>>  ipm;
-            Map<String,Collection<?>> ipvm;
+        AttributionSpecification extendedSpecification = new AttributionSpecification();
+        extendedSpecification.setQueryHelper(queryHelper);
+        return extendedSpecification;
+    }
+    public static AttributionEntityQueryHelper create(String inField, Collection<?> inValues,Class clazz) {
+        AttributionEntityQueryHelper queryHelper = new AttributionEntityQueryHelper();
+        queryHelper.setResultClass(clazz);
+        queryHelper.setWithIn(true);
+        queryHelper.setInField(inField);
+        queryHelper.setInValues(inValues);
+        return queryHelper;
+    }
+    public static AttributionEntityQueryHelper create(Class clazz) {
+        AttributionEntityQueryHelper queryHelper = new AttributionEntityQueryHelper();
+        queryHelper.setResultClass(clazz);
+        return queryHelper;
+    }
+}
+class AttributionSpecification<PmsBaseAttrition> extends ExtendedSpecificationAdapter<PmsBaseAttrition> {
+    @Override
+    public List<String> excludeName() {
+        return Lists.newArrayList("values","options");
+    }
 
-            @Override
-            public Predicate toPredicate(Root<PmsBaseAttrition> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
-                List<Predicate> predicates = new ArrayList<Predicate>();
+    @Override
+    public Predicate toPredicate(Root<PmsBaseAttrition> root, CriteriaQuery<?> query, CriteriaBuilder cb) {
+        AttributionEntityQueryHelper queryHelper = (AttributionEntityQueryHelper) getQueryHelper();
+        List<Predicate> predicates = new ArrayList<Predicate>();
+        if(queryHelper.getCateId()!=null){
+            Predicate predicate = cb.equal(root.get("cateId").as(Long.class), queryHelper.getCateId());
+            predicates.add(predicate);
+        }
+        if(queryHelper.getGroupId()!=null){
+            Predicate predicate = cb.equal(root.get("groupId").as(Long.class), queryHelper.getGroupId());
+            predicates.add(predicate);
+        }
+        if(queryHelper.getHasOption()!=null){
+            Predicate predicate = cb.equal(root.get("hasOptions").as(Boolean.class), queryHelper.getHasOption());
+            predicates.add(predicate);
+        }
+        if(queryHelper.getGeneric()!=null){
+            Predicate predicate = cb.equal(root.get("generic").as(Boolean.class), queryHelper.getGeneric());
+            predicates.add(predicate);
+        }
+        if(queryHelper.getSearching()!=null){
+            Predicate predicate = cb.equal(root.get("searching").as(Boolean.class), queryHelper.getSearching());
+            predicates.add(predicate);
+        }
 
-                if(queryHelper.getHasOption()!=null){
-                    Predicate predicate = cb.equal(root.get("hasOptions").as(Boolean.class), queryHelper.getHasOption());
-                    predicates.add(predicate);
-                }
-
-                /**
-                 * in 查询条件
-                 */
-                if(queryHelper.isWithIn()){
-                    Assert.isNull(queryHelper.getInField(),"in 查询字段不能为空");
-                    Path<?> path = root.get(queryHelper.getInField());
-                    ParameterExpression<Collection<?>> parameter =
-                            (ParameterExpression<Collection<?>>) (ParameterExpression) cb.parameter(Collection.class);
-                    ipm = Maps.newHashMap();
-                    ipm.put(queryHelper.getInField(),parameter);
-                    ipvm = Maps.newHashMap();
-                    ipvm.put(queryHelper.getInField(),queryHelper.getInValues());
-
-                    predicates.add(path.in(parameter));
-                }
-                return cb.and(predicates.toArray(new Predicate[predicates.size()]));
-            }
-
-            @Override
-            public Map<String, ParameterExpression<Collection<?>>> getInParameterMap() {
-                return ipm;
-            }
-            @Override
-            public Map<String, Collection<?>> getInParameterValueMap() {
-                return ipvm;
-            }
-
-
-
-            @Override
-            public boolean hasInCondition() {
-                return queryHelper.isWithIn();
-            }
-        };
+        /**
+         * in 查询条件
+         */
+        setInQuery(predicates,queryHelper,root,cb);
+        return cb.and(predicates.toArray(new Predicate[predicates.size()]));
     }
 }

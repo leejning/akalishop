@@ -33,6 +33,10 @@ public class PmsBaseAttrValue {
      */
     @Column(length=32)
     private String value;
+    /**
+     * 选项型属性值 对应选项的id
+     */
+    private Long optionId;
 
     public PmsBaseAttrValue(Long attrId, Long spuId, String value) {
         this.attrId = attrId;

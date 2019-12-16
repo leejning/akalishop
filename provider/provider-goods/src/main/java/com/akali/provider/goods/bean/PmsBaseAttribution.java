@@ -66,5 +66,10 @@ public class PmsBaseAttribution {
      */
     @Column(columnDefinition="tinyint",length=2)
     private Boolean hasOptions;
+    /**
+     * 属性英文名
+     */
+    @Column(length = 30)
+    private String enName;
 
 }

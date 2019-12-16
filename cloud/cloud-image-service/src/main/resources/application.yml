@@ -1,5 +1,5 @@
 server:
-  port: ${random.int[8100,9999]}
+  port: 8088
 spring:
   application:
     name: cloud-image-service

@@ -1,6 +1,5 @@
 package com.akali.provider.es.service;
 
-import com.akali.common.utils.IdUtil;
 import com.akali.provider.es.bean.Product;
 import com.akali.provider.es.dao.ProductDao;
 import com.fasterxml.jackson.core.JsonProcessingException;
@@ -31,22 +30,18 @@ public class BuildServiceTest {
     }
     @Test
     public void deleteIndex(){
-
         elasticsearchTemplate.deleteIndex("products");
-
     }
 
     @Test
     public void buildProductBySpuId() throws JsonProcessingException {
-        buildService.buildProductBySpuId(1L);
+        buildService.buildProductBySpuId(4L);
     }
 
     @Test
     public void findById(){
-        Product product = productDao.findById(1L).get();
+        Product product = productDao.findById(4L).get();
         System.out.println(product);
-        System.out.println(IdUtil.nextId());
-        System.out.println(Long.MAX_VALUE);
     }
 
 

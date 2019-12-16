@@ -26,6 +26,11 @@ public class UmsAdminRole {
     private String roleName;
 
     /**
+     * 角色标识
+     */
+    private String roleSign;
+
+    /**
      * 角色与权限的多对多联系
      */
     @ManyToMany(cascade = CascadeType.REFRESH,fetch = FetchType.EAGER)

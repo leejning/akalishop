@@ -5,6 +5,7 @@ import lombok.NoArgsConstructor;
 import lombok.ToString;
 
 import java.io.Serializable;
+import java.util.Collection;
 import java.util.List;
 
 
@@ -16,11 +17,12 @@ public class QueryResult<T> implements Serializable {
     /**
      * 数据集合
      */
-    private List<T> list;
+    private Collection<T> list;
     /**
      * 数据总数
      */
     private Long total;
+    private Integer totalPage;
     /**
      * 页码
      */
@@ -30,6 +32,7 @@ public class QueryResult<T> implements Serializable {
      */
     private Integer pageSize;
     private String descOrAsc;
+
     private String sortby;
 
     QueryResult(List<T> list, Long total) {
@@ -37,8 +40,17 @@ public class QueryResult<T> implements Serializable {
         this.total = total;
     }
 
+    QueryResult(List<T> list,Integer totalPage, Long total) {
+        this.list = list;
+        this.total = total;
+        this.totalPage = totalPage;
+    }
+
     public static<T> QueryResult<T> create(List<T> list, Long total){
         return new QueryResult(list,total);
+    }
+    public static<T> QueryResult<T> create(List<T> list,Integer totalPage, Long total){
+        return new QueryResult(list,totalPage,total);
     }
 
 }

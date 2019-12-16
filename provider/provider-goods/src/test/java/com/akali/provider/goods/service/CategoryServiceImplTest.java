@@ -1,7 +1,7 @@
 package com.akali.provider.goods.service;
 
 
-import com.akali.common.dto.goods.base.CategoryDTO;
+import com.akali.common.dto.goods.base.category.CategoryDTO;
 import com.akali.common.model.response.DubboResponse;
 import com.akali.provider.goods.api.CategoryService;
 import org.apache.dubbo.config.annotation.Reference;
@@ -22,10 +22,10 @@ public class CategoryServiceImplTest {
      */
     @Test
     public void createBaseCategory(){
-        CategoryDTO categoryDTO = new CategoryDTO();
-        categoryDTO.setName("电子书刊");
-        categoryDTO.setParentId(1L);
-        DubboResponse response =  categoryService.createBaseCategory(categoryDTO);
+        CategoryDTO categoryVO = new CategoryDTO();
+        categoryVO.setName("电子书刊");
+        categoryVO.setParentId(1L);
+        DubboResponse response =  categoryService.createBaseCategory(categoryVO);
         System.out.println(response);
     }
 
@@ -34,10 +34,10 @@ public class CategoryServiceImplTest {
      */
     @Test
     public void createCategory(){
-        CategoryDTO categoryDTO = new CategoryDTO();
-        categoryDTO.setName("电子书");
-        categoryDTO.setParentId(2L);
-        DubboResponse response =  categoryService.createCategory(categoryDTO);
+        CategoryDTO categoryVO = new CategoryDTO();
+        categoryVO.setName("电子书");
+        categoryVO.setParentId(2L);
+        DubboResponse response =  categoryService.createCategory(categoryVO);
         System.out.println(response);
     }
 

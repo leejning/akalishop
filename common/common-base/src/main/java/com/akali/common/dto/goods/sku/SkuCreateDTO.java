@@ -15,18 +15,6 @@ import java.util.Map;
 public class SkuCreateDTO {
     private Long spuId;
     /**
-     * sku标题
-     */
-    private String title;
-    /**
-     * 主图片
-     */
-    private String mainImage;
-    /**
-     * 价格
-     */
-    private Long price;
-    /**
      * sku特有属性，Map<Long,Long>
      * {
      *     attrId : attrValueId,

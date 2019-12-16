@@ -2,6 +2,7 @@ package com.akali.cloud.service
         ;
 
 import com.akali.common.code.UploadCode;
+import com.akali.common.utils.ExceptionCast;
 import com.github.tobato.fastdfs.domain.StorePath;
 import com.github.tobato.fastdfs.service.FastFileStorageClient;
 import lombok.extern.slf4j.Slf4j;
@@ -57,6 +58,7 @@ public class UploadService {
         StorePath storePath = this.storageClient.uploadFile(
                 file.getInputStream(), file.getSize(), extension, null);
         // 2.3、返回完整路径
+
         return "http://dgut.online/" + storePath.getFullPath();
     }
 }

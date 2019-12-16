@@ -1,6 +1,7 @@
 package com.akali.cloud.email.listener;
 
 import com.akali.cloud.email.service.EmailService;
+import com.akali.common.dto.EmailContextDTO;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.amqp.core.ExchangeTypes;
 import org.springframework.amqp.rabbit.annotation.Exchange;

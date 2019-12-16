@@ -39,6 +39,11 @@ public class SkuEntityQueryHelper extends BaseEntityQueryHelper {
             }
 
             @Override
+            public List<String> excludeName() {
+                return Lists.newArrayList("props");
+            }
+
+            @Override
             public Class getResultClass() {
                 return queryHelper.getResultClass();
             }

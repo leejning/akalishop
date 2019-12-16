@@ -1,7 +1,11 @@
 package com.akali.provider.goods.service;
 
 import com.akali.common.code.CommonCode;
+import com.akali.common.data_help.DataJpaPageUtils;
+import com.akali.common.data_help.PageAndSortObj;
 import com.akali.common.dto.goods.base.SaleOptionDTO;
+import com.akali.common.dto.goods.base.SaleOptionVO;
+import com.akali.common.dto.query.SaleOptionQueryDTO;
 import com.akali.common.model.response.DubboResponse;
 import com.akali.common.model.response.QueryResult;
 import com.akali.provider.goods.api.SaleOptionService;
@@ -10,6 +14,7 @@ import com.akali.provider.goods.dao.BaseSaleOptionDao;
 import com.akali.provider.goods.queryhelper.SaleOptionEntityQueryHelper;
 import org.apache.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -32,7 +37,8 @@ public class SaleOptionServiceImpl implements SaleOptionService {
      */
     @Override
     public DubboResponse<Void> createSaleOption(SaleOptionDTO saleOptionDTO) {
-        PmsSaleOption pmsSaleOption = new PmsSaleOption(saleOptionDTO);
+        PmsSaleOption pmsSaleOption = new PmsSaleOption();
+        pmsSaleOption.setName(saleOptionDTO.getName());
         baseSaleOptionDao.save(pmsSaleOption);
         return DubboResponse.SUCCESS(CommonCode.SUCCESS);
     }
@@ -52,4 +58,39 @@ public class SaleOptionServiceImpl implements SaleOptionService {
         //返回结果
         return DubboResponse.SUCCESS(QueryResult.create(data,(long)data.size()));
     }
+
+    /**
+     * 搜索获取销售属性，商品选择销售属性时使用
+     *
+     * @param saleOptionQueryDTO
+     * @return
+     */
+    @Override
+    public DubboResponse<QueryResult<SaleOptionVO>> querySaleOption(SaleOptionQueryDTO saleOptionQueryDTO) {
+        SaleOptionEntityQueryHelper queryHelper = SaleOptionEntityQueryHelper.create(SaleOptionVO.class);
+        queryHelper.setName(saleOptionQueryDTO.getName());
+        List<SaleOptionVO> data = baseSaleOptionDao.findAll(
+                SaleOptionEntityQueryHelper.getWhere(queryHelper), SaleOptionVO.class);
+        QueryResult<SaleOptionVO> queryResult = DataJpaPageUtils.setQueryResult(data, (long) data.size());
+        return DubboResponse.SUCCESS(queryResult);
+    }
+
+    /**
+     * 获取销售选项分页列表
+     *
+     * @param saleOptionQueryDTO
+     * @return
+     */
+    @Override
+    public DubboResponse<QueryResult<SaleOptionVO>> querySaleOptionPage(SaleOptionQueryDTO saleOptionQueryDTO) {
+        PageAndSortObj pageAndSortObj = DataJpaPageUtils.initPageAndSort(saleOptionQueryDTO);
+        SaleOptionEntityQueryHelper queryHelper = SaleOptionEntityQueryHelper.create(SaleOptionVO.class);
+        queryHelper.setName(saleOptionQueryDTO.getName());
+        Page<SaleOptionVO> data = (Page<SaleOptionVO>) baseSaleOptionDao.findAll(
+                SaleOptionEntityQueryHelper.getWhere(queryHelper),pageAndSortObj.getPageable(), SaleOptionVO.class);
+        QueryResult<SaleOptionVO> queryResult = DataJpaPageUtils.setQueryResult(data,saleOptionQueryDTO);
+        return DubboResponse.SUCCESS(queryResult);
+    }
+
+
 }

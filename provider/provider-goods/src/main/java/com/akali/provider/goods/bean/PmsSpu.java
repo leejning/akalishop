@@ -25,21 +25,12 @@ public class PmsSpu {
      * 品牌id
      */
     private Long brandId;
+    private String brandName;
     /**
      * 商品简称
      */
     @Column(length=64)
     private String simpleName;
-    /**
-     * 主标题
-     */
-    @Column(length=256)
-    private String title;
-    /**
-     * 促销信息
-     */
-    @Column(length=256)
-    private String subTitle;
     /**
      * 分类id
      */
@@ -49,18 +40,15 @@ public class PmsSpu {
     private Long cid2;
     @Column(length=20)
     private Long cid3;
+    @Column(length = 60)
+    private String categoryName;
     /**
-     * 在售状态
+     * 状态 1:未审核 ，2:已审核，3:未上架，4:已上架，0:审核未通过
      */
-    @Column(columnDefinition="tinyint",length=2)
-    private Boolean saleable;
+    @Column(length = 1)
+    private Integer status;
     /**
-     * 是否合法，审核
-     */
-    @Column(columnDefinition="tinyint",length=2)
-    private Boolean valid;
-    /**
-     * 在售状态
+     * 删除状态
      */
     @Column(columnDefinition="tinyint",length=2)
     private Boolean del;
@@ -69,11 +57,4 @@ public class PmsSpu {
      */
     @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
     private Date createTime;
-    /**
-     * 最后修改时间
-     */
-    @JsonFormat(pattern = "yyyy-MM-dd hh:mm:ss", timezone = "GMT+8")
-    private Date lastUpdateTime;
-    @Column(length=64)
-    private String lastModifyAdmin;
 }

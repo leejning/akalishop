@@ -1,0 +1,17 @@
+//                                                //
+                  .へ　　　　／|
+　　             /＼7　　　∠＿/
+　              /　│　　 ／　／
+　              │　Z ＿,＜　／　　 /`ヽ
+　              /　　　　　 ヽ　　/　　〉
+　              Y 　　　　　  `　/　　/
+　              ｲ●　､　●　　⊂⊃〈　　/
+　              ()　 へ　　　　|　＼〈
+　　              >ｰ ､_　 ィ　 \ ／／
+　               / へ　　 /　ﾉ＜| ＼＼
+　               ヽ_ﾉ　　(_／　 │／／
+　　              7　　　　　　 |／
+　　              ＞―r￣￣`ｰ―＿/
+                  '''
+//              萌兽保佑     永无BUG               //
+::: Project (version:${application.version}) :::      ＼(^O^)／    Spring-Boot ${spring-boot.version}

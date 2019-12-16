@@ -1,9 +1,9 @@
 package com.akali.provider.goods.service;
 
 import com.akali.common.code.ProductCode;
-import com.akali.common.dto.goods.sku.SkuEsDTO;
-import com.akali.common.dto.goods.spu.SpuDetailDTO;
-import com.akali.common.dto.goods.spu.SpuEsDTO;
+import com.akali.common.dto.goods.sku.SkuEsVO;
+import com.akali.common.dto.goods.spu.SpuDetailVO;
+import com.akali.common.dto.goods.spu.SpuEsVO;
 import com.akali.common.model.response.DubboResponse;
 import com.akali.provider.goods.api.ProductEsService;
 import com.akali.provider.goods.bean.PmsSpu;
@@ -41,24 +41,25 @@ public class ProductEsServiceImpl implements ProductEsService {
      * @return
      */
     @Override
-    public DubboResponse<SpuEsDTO> queryProductEsBySpuId(Long spuId) {
+    public DubboResponse<SpuEsVO> queryProductEsBySpuId(Long spuId) {
         Optional<PmsSpu> opt = spuDao.findById(spuId);
         if(!opt.isPresent()){
             DubboResponse.FAIL(ProductCode.SPU_NOT_EXSIST);
         }
         PmsSpu spu = opt.get();
-        SpuEsDTO spuEsDTO = new SpuEsDTO();
-        BeanUtils.copyProperties(spu,spuEsDTO);
-        spuEsDTO.setSpuId(spu.getId());
+        SpuEsVO spuEsVO = new SpuEsVO();
+        BeanUtils.copyProperties(spu, spuEsVO);
+        spuEsVO.setSpuId(spu.getId());
         PmsSpuDetail spuDetail = spuDetailDao.findById(spu.getId()).get();
-        SpuDetailDTO spuDetailDTO = new SpuDetailDTO(spuDetail);
-        spuEsDTO.setSpuDetail(spuDetailDTO);
+        SpuDetailVO spuDetailVO = new SpuDetailVO(spuDetail);
+        spuEsVO.setSpuDetail(spuDetailVO);
 
-        SkuEntityQueryHelper queryHelper = SkuEntityQueryHelper.create(SpuEsDTO.class);
-        List<SkuEsDTO> skuEsDTOS = skuDao.findAll(SkuEntityQueryHelper.getWhere(queryHelper), SkuEsDTO.class);
+        SkuEntityQueryHelper queryHelper = SkuEntityQueryHelper.create(SkuEsVO.class);
+        queryHelper.setSpuId(spuId);
+        List<SkuEsVO> skuEsVOS = skuDao.findAll(SkuEntityQueryHelper.getWhere(queryHelper), SkuEsVO.class);
 
-        spuEsDTO.setSkus(skuEsDTOS);
+        spuEsVO.setSkus(skuEsVOS);
 
-        return DubboResponse.SUCCESS(spuEsDTO);
+        return DubboResponse.SUCCESS(spuEsVO);
     }
 }

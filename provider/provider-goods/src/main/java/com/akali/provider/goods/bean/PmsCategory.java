@@ -28,4 +28,7 @@ public class PmsCategory {
      */
     @Column(length = 20)
     private Long parentId;
+
+    @Column(length = 40)
+    private String fullName;
 }

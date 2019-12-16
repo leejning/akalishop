@@ -18,7 +18,7 @@ import java.util.Date;
 @Table(name = "ums_admin_user")
 public class UmsAdminUser {
     @Id
-    @GeneratedValue(strategy=GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     /**
      * 管理员角色
@@ -28,7 +28,7 @@ public class UmsAdminUser {
      * 登录账号对应oauth2的username；
      */
     @Column(length = 32)
-    private String loginAccount;
+    private String adminAccount;
     /**
      * 登录密码
      */
@@ -48,7 +48,7 @@ public class UmsAdminUser {
     /**
      * 手机号码
      */
-    @Column(length = 64,unique = true)
+    @Column(length = 64, unique = true)
     private String phone;
     /**
      * 帐号启用状态:false->禁用；true->启用
@@ -64,7 +64,7 @@ public class UmsAdminUser {
      * 头像
      */
     @Column(length = 300)
-    private String icon;
+    private String avatar;
     /**
      * 性别 ，0->未知，1->男，2->女
      */
@@ -72,9 +72,17 @@ public class UmsAdminUser {
     private Integer gender;
 
 
-    public UmsAdminUser(Long id,Long roleId, String password) {
+    public UmsAdminUser(Long id, Long roleId, String password, String avatar, String adminName) {
         this.id = id;
         this.roleId = roleId;
         this.password = password;
+        this.avatar = avatar;
+        this.adminName = adminName;
+    }
+    public UmsAdminUser(Long id, Long roleId, String avatar, String adminName) {
+        this.id = id;
+        this.roleId = roleId;
+        this.avatar = avatar;
+        this.adminName = adminName;
     }
 }

@@ -26,11 +26,11 @@ public class ProductServiceImplTest {
     public void createProductSku() throws Exception {
         SkuCreateDTO skuCreateDTO = new SkuCreateDTO();
         skuCreateDTO.setSpuId(1L);
-        skuCreateDTO.setTitle("锤子(smartisan) 坚果Pro3 8GB+256GB 白色 骁龙855PLUS 4800万四摄 UFS3.0 全网通双卡双待 全面屏游戏手机");
-        skuCreateDTO.setMainImage("http://img14.360buyimg.com/n1/s450x450_jfs/t1/55959/5/14592/40628/5dbadae0Ed5facac2/6121e53fe1a724bb.jpg");
-        skuCreateDTO.setPrice(319900L);
+//        skuCreateDTO.setTitle("锤子(smartisan) 坚果Pro3 8GB+256GB 白色 骁龙855PLUS 4800万四摄 UFS3.0 全网通双卡双待 全面屏游戏手机");
+//        skuCreateDTO.setMainImage("http://img14.360buyimg.com/n1/s450x450_jfs/t1/55959/5/14592/40628/5dbadae0Ed5facac2/6121e53fe1a724bb.jpg");
+//        skuCreateDTO.setPrice(319900L);
         Map<Long, Long> map = Maps.newHashMap();
-        map.put(1L,2L);
+        map.put(1L,1L);
         map.put(2L,4L);
         map.put(5L,8L);
         skuCreateDTO.setOwnSpec(map);

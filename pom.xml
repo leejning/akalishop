@@ -24,6 +24,7 @@
         <module>configuration</module>
         <module>message</module>
         <module>dependencies</module>
+        <module>gateway</module>
     </modules>
     <properties>
         <!-- Native Cloud -->

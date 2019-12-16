@@ -10,7 +10,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.akali.cloud</groupId>
-    <artifactId>cloud-send-message-service</artifactId>
+    <artifactId>cloud-mq-message-producer-service</artifactId>
 
     <dependencies>
         <dependency>
@@ -38,12 +38,6 @@
             <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
         </dependency>-->
 
-
-        <dependency>
-            <groupId>com.akali.common</groupId>
-            <artifactId>common-dto</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
         <dependency>
             <groupId>com.akali.config</groupId>
             <artifactId>config-web-swagger2</artifactId>

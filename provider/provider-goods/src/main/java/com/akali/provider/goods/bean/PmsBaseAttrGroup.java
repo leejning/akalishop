@@ -11,7 +11,7 @@ import javax.persistence.*;
  * @Date 2019/11/11 0011
  * @Version V1.0
  **/
-@Table(name="pms_base_attr_group")
+@Table(name = "pms_base_attr_group")
 @Entity
 @Data
 public class PmsBaseAttrGroup {

@@ -1,5 +1,6 @@
 package com.akali.cloud.api;
 
+import com.akali.cloud.service.FileWrap;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;

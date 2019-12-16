@@ -1,6 +1,6 @@
 package com.akali.provider.goods.api;
 
-import com.akali.common.dto.goods.spu.SpuEsDTO;
+import com.akali.common.dto.goods.spu.SpuEsVO;
 import com.akali.common.model.response.DubboResponse;
 
 /**
@@ -16,5 +16,5 @@ public interface ProductEsService {
      * @param spuId
      * @return
      */
-    DubboResponse<SpuEsDTO> queryProductEsBySpuId(Long spuId);
+    DubboResponse<SpuEsVO> queryProductEsBySpuId(Long spuId);
 }

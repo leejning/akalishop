@@ -28,4 +28,14 @@ public class PmsBaseCategory {
      */
     @Column(length = 20)
     private Long parentId;
+    /**
+     * 分类等级 1 或者 2
+     */
+    @Column(length = 1)
+    private Integer level;
+    /**
+     *
+     */
+    @Column(length = 40)
+    private String fullName;
 }

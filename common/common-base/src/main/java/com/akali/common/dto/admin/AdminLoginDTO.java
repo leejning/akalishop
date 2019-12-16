@@ -14,6 +14,8 @@ import java.util.List;
 @Data
 public class AdminLoginDTO {
     private Long id;
+    private String adminName;
+    private String avatar;
     private String password;
     List<String> permissions;
 }

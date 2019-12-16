@@ -21,16 +21,14 @@ public class PmsSaleOption {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    /**
-     * 三级分类id
-     */
-    private Long cateId;
 
     /**
      * 选项名
      */
     @Column(length = 20)
     private String name;
+
+    private Long hot;
 
     public PmsSaleOption(Object object) {
         BeanUtils.copyProperties(object,this);

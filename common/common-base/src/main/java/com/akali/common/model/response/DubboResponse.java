@@ -5,6 +5,8 @@ import com.akali.common.code.ResultCode;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 /**
  * @ClassName DubboResponse
  * @Description: TODO
@@ -14,7 +16,8 @@ import lombok.NoArgsConstructor;
  **/
 @NoArgsConstructor
 @Getter
-public class DubboResponse<T> implements Response{
+public class DubboResponse<T> implements Response, Serializable {
+    private static final long serialVersionUID = 982646550094716277L;
     private ResultCode resultCode;
     private T data;
     private boolean success = SUCCESS;

@@ -1,9 +1,10 @@
 package com.akali.provider.es.service;
 
-import com.akali.common.dto.goods.base.AttrOptionDTO;
-import com.akali.common.dto.goods.base.AttrValueDTO;
-import com.akali.common.dto.goods.base.CateAttributeDTO;
-import com.akali.common.dto.goods.spu.SpuEsDTO;
+import com.akali.common.dto.goods.base.attribute.AttrOptionVO;
+import com.akali.common.dto.goods.base.attribute.AttrValueVO;
+import com.akali.common.dto.goods.base.category.CateAttributeVO;
+import com.akali.common.dto.goods.spu.SpuDetailVO;
+import com.akali.common.dto.goods.spu.SpuEsVO;
 import com.akali.common.model.response.DubboResponse;
 import com.akali.common.utils.ExceptionCast;
 import com.akali.common.utils.MapperUtils;
@@ -50,7 +51,7 @@ public class BuildService {
 
     @Transactional
     public void buildProductBySpuId(Long SpuId) throws JsonProcessingException {
-        DubboResponse<SpuEsDTO> resp = productEsService.queryProductEsBySpuId(SpuId);
+        DubboResponse<SpuEsVO> resp = productEsService.queryProductEsBySpuId(SpuId);
         if (!resp.isSuccess()) {
             ExceptionCast.cast(resp.getResultCode());
         }
@@ -58,26 +59,26 @@ public class BuildService {
         productDao.save(product);
     }
 
-    public Product buildProduct(SpuEsDTO spuEsDTO) throws JsonProcessingException {
+    public Product buildProduct(SpuEsVO spuEsVO) throws JsonProcessingException {
         //获取全部属性信息
-        DubboResponse<List<CateAttributeDTO>> attrQuery = attributionService.queryAttributesByCid(spuEsDTO.getCid3());
+        DubboResponse<List<CateAttributeVO>> attrQuery = attributionService.queryAttributesByCid(spuEsVO.getCid3());
         if (!attrQuery.isSuccess()) {
             ExceptionCast.cast(attrQuery.getResultCode());
         }
-        List<CateAttributeDTO> attrs = attrQuery.getData();
+        List<CateAttributeVO> attrs = attrQuery.getData();
 
         //处理固定选项的属性
-        List<AttrOptionDTO> attrOptions = Lists.newArrayList();
+        List<AttrOptionVO> attrOptions = Lists.newArrayList();
         attrs.stream().filter(a -> a.getHasOptions()).forEach(a -> attrOptions.addAll(a.getOptions()));
-        Map<Long, AttrOptionDTO> attrOptMap = attrOptions.stream().collect(Collectors.toMap(a -> a.getId(), a -> a));
+        Map<Long, AttrOptionVO> attrOptMap = attrOptions.stream().collect(Collectors.toMap(a -> a.getId(), a -> a));
 
         /**
          * 预处理属性
          */
         //spu属性集合
-        List<CateAttributeDTO> spuAttrs = Lists.newArrayList();
+        List<CateAttributeVO> spuAttrs = Lists.newArrayList();
         //sku属性集合
-        List<CateAttributeDTO> skuAttrs = Lists.newArrayList();
+        List<CateAttributeVO> skuAttrs = Lists.newArrayList();
         /**
          * 标记attr是否是通用属性，key是attrId
          */
@@ -92,32 +93,32 @@ public class BuildService {
         });
 
         //获取所有属性值
-        DubboResponse<List<AttrValueDTO>> attrValueQuery = attributionService.queryProductAttrValueBySpuId(spuEsDTO.getSpuId());
+        DubboResponse<List<AttrValueVO>> attrValueQuery = attributionService.queryProductAttrValueBySpuId(spuEsVO.getSpuId());
         if (!attrValueQuery.isSuccess()) {
             ExceptionCast.cast(attrValueQuery.getResultCode());
         }
-        List<AttrValueDTO> attrValues = attrValueQuery.getData();
+        List<AttrValueVO> attrValues = attrValueQuery.getData();
 
         /**
          * 预处理属性值
          */
         //key是 attrId ，value 是 attrValue
-        Map<Long, String> spuAttrValueMap = Maps.newHashMap();
-        Map<Long, List<String>> skuAttrValueMap = Maps.newHashMap();
+        Map<Long, AttrValueVO> spuAttrValueMap = Maps.newHashMap();
+        Map<Long, List<AttrValueVO>> skuAttrValueMap = Maps.newHashMap();
         attrValues.stream().forEach(av -> {
-            if(!attrFlagMap.containsKey(av.getAttrId())){
+            if (!attrFlagMap.containsKey(av.getAttrId())) {
 
             }
             //spu属性
             else if (attrFlagMap.get(av.getAttrId())) {
-                spuAttrValueMap.put(av.getAttrId(), av.getValue());
+                spuAttrValueMap.put(av.getAttrId(), av);
             }
             //sku属性
             else {
                 if (!skuAttrValueMap.containsKey(av.getAttrId())) {
                     skuAttrValueMap.put(av.getAttrId(), Lists.newArrayList());
                 }
-                skuAttrValueMap.get(av.getAttrId()).add(av.getValue());
+                skuAttrValueMap.get(av.getAttrId()).add(av);
             }
         });
 
@@ -134,24 +135,25 @@ public class BuildService {
         //构建attrs中spu的部分
         spuAttrs.stream().forEach(a -> {
             String key = a.getName();
-            String value = spuAttrValueMap.get(a.getId());
-            //该属性带有固定选项 value 是 optId, 且是数字类型的属性值
+            AttrValueVO attrValueVO = spuAttrValueMap.get(a.getId());
+            String value = attrValueVO.getValue();
+            //该属性带有固定选项, 且是数字类型的属性值
             if (a.getHasOptions() && a.getNumeric()) {
-                AttrOptionDTO attrOptionDTO = attrOptMap.get(new Long(value));
+                AttrOptionVO attrOptionVO = attrOptMap.get(attrValueVO.getOptionId());
                 //处理数字分段查找
-                Float numValue = attrOptionDTO.getNumValue();
-                value = chooesSegment(numValue, a.getSegments(), a.getUnit());
+                Float numValue = attrOptionVO.getNumValue();
+                value = chooesSegment(numValue, attrValueVO.getValue(), a.getSegments(), a.getUnit());
             }
-            //该属性带有固定选项 value 是 optId
+            //该属性带有固定选项
             else if (a.getHasOptions()) {
-                AttrOptionDTO attrOptionDTO = attrOptMap.get(new Long(value));
-                value = attrOptionDTO.getContent();
+                AttrOptionVO attrOptionVO = attrOptMap.get(attrValueVO.getOptionId());
+                value = attrOptionVO.getContent();
             }
             //不带固定选项，但是值为数字的属性
             else if (a.getNumeric()) {
                 Float numValue = new Float(value);
                 //处理数字分段查找
-                value = chooesSegment(numValue, a.getSegments(), a.getUnit());
+                value = chooesSegment(numValue, attrValueVO.getValue(), a.getSegments(), a.getUnit());
             }
             attrMap.put(key, value);
         });
@@ -159,60 +161,66 @@ public class BuildService {
         //构建attrs中sku的部分
         skuAttrs.stream().forEach(a -> {
             String key = a.getName();
-            List<String> values = skuAttrValueMap.get(a.getId());
+
+            List<AttrValueVO> attrValueVOS = skuAttrValueMap.get(a.getId());
             List<String> finalValues = Lists.newArrayList();
-            //该属性带有固定选项 value 是 optId, 且是数字类型的属性值
+            //该属性带有固定选项, 且是数字类型的属性值
             if (a.getHasOptions() && a.getNumeric()) {
-                for (String v : values) {
-                    AttrOptionDTO attrOptionDTO = attrOptMap.get(new Long(v));
+                for (AttrValueVO v : attrValueVOS) {
+                    AttrOptionVO attrOptionVO = attrOptMap.get(v.getOptionId());
                     //处理数字分段查找
-                    Float numValue = attrOptionDTO.getNumValue();
-                    finalValues.add(chooesSegment(numValue, a.getSegments(), a.getUnit()));
+                    Float numValue = attrOptionVO.getNumValue();
+                    String value = chooesSegment(numValue, v.getValue(), a.getSegments(), a.getUnit());
+                    finalValues.add(value);
                 }
             }
-            //该属性带有固定选项 value 是 optId
+            //该属性带有固定选项
             else if (a.getHasOptions()) {
-                for (String v : values) {
-                    AttrOptionDTO attrOptionDTO = attrOptMap.get(new Long(v));
-                    finalValues.add(attrOptionDTO.getContent());
-                };
+                List<String> values = attrValueVOS.stream().map(AttrValueVO::getValue)
+                        .collect(Collectors.toList());
+                finalValues.addAll(values);
             }
             //不带固定选项，但是值为数字的属性
             else if (a.getNumeric()) {
-                for (String v : values) {
-                    Float numValue = new Float(v);
+                for (AttrValueVO v : attrValueVOS) {
+                    Float numValue = new Float(v.getValue());
                     //处理数字分段查找
-                    finalValues.add(chooesSegment(numValue, a.getSegments(), a.getUnit()));
-                };
-            }
-            else{
+                    finalValues.add(chooesSegment(numValue, v.getValue() + a.getUnit(), a.getSegments(), a.getUnit()));
+                }
+            } else {
+                List<String> values = attrValueVOS.stream().map(AttrValueVO::getValue)
+                        .collect(Collectors.toList());
                 finalValues = values;
             }
             attrMap.put(key, finalValues);
         });
 
-        DubboResponse<String> response = categoryService.queryFullCateName(spuEsDTO.getCid1(), spuEsDTO.getCid2(), spuEsDTO.getCid3());
+        DubboResponse<String> response = categoryService.getCateFullNameById(spuEsVO.getCid3());
+
         if (!response.isSuccess()) {
             ExceptionCast.cast(response.getResultCode());
         }
 
         Product product = new Product();
         product.setCategoryFullName(response.getData());
-        BeanUtils.copyProperties(spuEsDTO, product);
+        BeanUtils.copyProperties(spuEsVO, product);
+        SpuDetailVO spuDetail = spuEsVO.getSpuDetail();
+        product.setTitle(spuDetail.getTitle());
+        product.setSubTitle(spuDetail.getSubTitle());
         product.setCreateTime(new Date());
-        product.setSkus(MapperUtils.obj2json(spuEsDTO.getSkus()));
+        product.setSkus(MapperUtils.obj2json(spuEsVO.getSkus()));
         product.setAttrs(attrMap);
-        product.setId(spuEsDTO.getSpuId());
+        product.setId(spuEsVO.getSpuId());
         String all = product.getTitle() + product.getCategoryFullName() +
                 product.getSkus() + MapperUtils.obj2json(product.getAttrs());
         product.setAll(all);
         return product;
     }
 
-    private String chooesSegment(Float numValue, String segments, String unit) {
+    private String chooesSegment(Float numValue, String oraginValue, String segments, String unit) {
         String result = "其它";
         if (StringUtils.isBlank(segments)) {
-            return numValue + " " + unit;
+            return oraginValue;
         }
         for (String segment : segments.split(",")) {
             String[] segs = segment.split("-");

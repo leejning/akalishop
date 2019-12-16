@@ -1,6 +1,6 @@
 package com.akali.provider.goods.service;
 
-import com.akali.common.dto.goods.base.CategoryAttrInfoDTO;
+import com.akali.common.dto.goods.base.category.CategoryAttrInfoVO;
 import com.akali.common.model.response.DubboResponse;
 import com.akali.provider.goods.api.AttributionService;
 import com.akali.provider.goods.bean.PmsBaseAttrOption;
@@ -42,7 +42,7 @@ public class AttributionServiceImplTest {
 
     @Test
     public void queryAllAttributeInfoByCid(){
-        DubboResponse<CategoryAttrInfoDTO> res = attributionService.queryAllAttributeByCidWithGroup(1l);
+        DubboResponse<CategoryAttrInfoVO> res = attributionService.queryAllAttributeByCidWithGroup(1l);
         System.out.println(res);
     }
 

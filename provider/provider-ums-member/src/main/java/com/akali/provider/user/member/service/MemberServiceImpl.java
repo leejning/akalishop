@@ -7,7 +7,7 @@ import com.akali.common.dto.member.MemberProfileDTO;
 import com.akali.common.dto.member.MemberRegDTO;
 import com.akali.common.model.response.DubboResponse;
 import com.akali.common.utils.IdUtil;
-import com.akali.provider.user.member.bean.UmsMember;
+import com.akali.provider.user.member.bean.UmsMemberUser;
 import com.akali.provider.user.member.dao.MemberDao;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.dubbo.config.annotation.Service;
@@ -39,12 +39,12 @@ public class MemberServiceImpl implements MemberService{
      */
     @Override
     public DubboResponse<Void> registry(MemberRegDTO memberRegDTO) {
-        UmsMember umsMember = new UmsMember();
-        BeanUtils.copyProperties(memberRegDTO,umsMember);
+        UmsMemberUser umsMemberUser = new UmsMemberUser();
+        BeanUtils.copyProperties(memberRegDTO, umsMemberUser);
         String password = bCryptPasswordEncoder.encode(memberRegDTO.getPassword());
-        umsMember.setPassword(password);
-        umsMember.setMemberAccount(Long.toString(IdUtil.nextId()));
-        memberDao.save(umsMember);
+        umsMemberUser.setPassword(password);
+        umsMemberUser.setMemberAccount(Long.toString(IdUtil.nextId()));
+        memberDao.save(umsMemberUser);
         return DubboResponse.SUCCESS(CommonCode.SUCCESS);
     }
 
@@ -87,7 +87,7 @@ public class MemberServiceImpl implements MemberService{
     public DubboResponse<MemberLoginResponseDTO> getMemberByAccount(String account) {
         log.info(">>>>>会员账号：{}，请求登录>>>>",account);
 
-        Optional<UmsMember> opt = memberDao.findMemberForLogin(account);
+        Optional<UmsMemberUser> opt = memberDao.findMemberForLogin(account);
 
         if(!opt.isPresent()){
             log.info(">>>>>会员账号：{}，不存在。返回错误结果>>>>",account);
@@ -107,7 +107,7 @@ public class MemberServiceImpl implements MemberService{
      */
     @Override
     public DubboResponse<MemberProfileDTO> getMemberProfile(Long memberId) {
-        Optional<UmsMember> opt = memberDao.findById(memberId);
+        Optional<UmsMemberUser> opt = memberDao.findById(memberId);
         if(!opt.isPresent()){
             DubboResponse.FAIL(MemberCode.MEMBER_ACCOUNT_NOT_EXIST);
         }

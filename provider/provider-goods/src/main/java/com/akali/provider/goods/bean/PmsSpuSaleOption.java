@@ -27,6 +27,7 @@ public class PmsSpuSaleOption {
      * 销售选项id
      */
     private Long saleOptionId;
+    private String saleOptionName;
 
     /**
      * 绑定的sku属性的id，PmsBaseAttribution类的id且generic值是false ，List<Long> 的json格式

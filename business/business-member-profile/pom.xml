@@ -53,12 +53,6 @@
             <version>${project.parent.version}</version>
         </dependency>
         <dependency>
-            <groupId>com.akali.common</groupId>
-            <artifactId>common-dto</artifactId>
-            <version>1.0-SNAPSHOT</version>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
             <groupId>com.akali.config</groupId>
             <artifactId>config-member-oauth2</artifactId>
             <version>${project.parent.version}</version>

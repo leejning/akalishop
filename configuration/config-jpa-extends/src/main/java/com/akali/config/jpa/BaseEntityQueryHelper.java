@@ -22,6 +22,12 @@ public class BaseEntityQueryHelper {
     private Collection<?> inValues = Collections.EMPTY_LIST;
     private Class<?> resultClass;
 
+    public void buildIn(String inField,Collection<?> inValues){
+        this.inField = inField;
+        this.inValues = inValues;
+        this.withIn = true;
+    }
+
     protected static String[] initResultFields(Class<?> resultClass){
         List<String> fieldNames = Arrays.asList(resultClass.getFields()).stream()
                 .map(f -> f.getName()).collect(Collectors.toList());

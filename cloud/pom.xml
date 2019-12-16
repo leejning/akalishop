@@ -44,11 +44,6 @@
             <artifactId>common-base</artifactId>
             <version>${project.parent.version}</version>
         </dependency>
-        <dependency>
-            <groupId>com.akali.common</groupId>
-            <artifactId>common-dto</artifactId>
-            <version>${project.parent.version}</version>
-        </dependency>
     </dependencies>
     <build>
         <plugins>

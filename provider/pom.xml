@@ -24,9 +24,19 @@
         <module>provider-ums-member</module>
         <module>provider-ums-admin-interface</module>
         <module>provider-ums-admin</module>
+        <module>provider-transfer</module>
+        <module>provider-validate-post-redo</module>
+        <module>provider-validate-post-redo-interface</module>
     </modules>
 
     <dependencies>
+        <!--热部署插件-->
+        <!--<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+        </dependency>-->
+
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-test</artifactId>

@@ -4,7 +4,6 @@ import com.akali.common.dto.admin.PermissionDTO;
 import com.akali.config.admin.oauth2.handler.AdminAccessDeniedHandler;
 import com.akali.config.admin.oauth2.handler.AdminAuthenticationEntryPoint;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.config.annotation.web.configurers.ExpressionUrlAuthorizationConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 
 import java.util.List;
@@ -18,12 +17,10 @@ import java.util.List;
  **/
 public class SerurityUtil {
     public static void configHttpSecurity(HttpSecurity http, List<PermissionDTO> permissions) throws Exception {
-        ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry config =
-                http.exceptionHandling()
-                        .and()
-                        .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS)//采取永不存储session的政策
-                        .and()
-                        .authorizeRequests();
+        http.exceptionHandling()
+                .and()
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);//采取永不存储session的政策
+
 
         for (PermissionDTO permission : permissions) {
             http.authorizeRequests()

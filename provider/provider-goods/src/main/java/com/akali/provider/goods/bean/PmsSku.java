@@ -39,11 +39,6 @@ public class PmsSku {
     @Column(length=200)
     private String mainImage;
     /**
-     * sku图片
-     */
-    @Column(length=1600)
-    private String images;
-    /**
      * 价格
      */
     @Column(length=15)

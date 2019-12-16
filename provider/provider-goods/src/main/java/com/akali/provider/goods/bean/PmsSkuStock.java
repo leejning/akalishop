@@ -30,10 +30,5 @@ public class PmsSkuStock {
      */
     @Column(length=9)
     private Integer stock;
-    /**
-     * 价格
-     */
-    @Column(length=15)
-    private Long price;
 
 }

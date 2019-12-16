@@ -10,6 +10,7 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -63,6 +64,12 @@ public class DataJpaPageUtils {
     public static<T> QueryResult<T> setQueryResult(List<T> data, Long total, QueryPageBase queryPageBase) {
         QueryResult<T> queryResult = new QueryResult();
         BeanUtils.copyProperties(queryPageBase,queryResult);
+        queryResult.setList(data);
+        queryResult.setTotal(total);
+        return queryResult;
+    }
+    public static<T> QueryResult<T> setQueryResult(Collection<T> data, Long total) {
+        QueryResult<T> queryResult = new QueryResult();
         queryResult.setList(data);
         queryResult.setTotal(total);
         return queryResult;

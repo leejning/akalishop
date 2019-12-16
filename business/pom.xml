@@ -23,9 +23,16 @@
         <module>business-member-login-oauth2</module>
         <module>business-public-goods-detail</module>
         <module>business-member-order</module>
+        <module>business-admin-profile</module>
     </modules>
 
     <dependencies>
+        <!--热部署插件-->
+        <!--<dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-devtools</artifactId>
+            <scope>runtime</scope>
+        </dependency>-->
         <!--swagger2配置项目-->
         <dependency>
             <groupId>com.akali.config</groupId>
