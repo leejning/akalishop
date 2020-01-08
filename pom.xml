@@ -37,7 +37,7 @@
 
         <!--common-->
         <fastDFS.client.version>1.26.2</fastDFS.client.version>
-        <hibernate.validator.version>6.0.17.Final</hibernate.validator.version>
+        <hibernate.validator.version>6.1.0.Final</hibernate.validator.version>
         <springfox-swagger.version>2.7.0</springfox-swagger.version>
         <google.guava>18.0</google.guava>
         <google.kaptcha>2.3.2</google.kaptcha>
